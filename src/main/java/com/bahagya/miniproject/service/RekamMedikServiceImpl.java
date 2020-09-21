@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class RekamMedikImpl implements RekamMedikService {
+public class RekamMedikServiceImpl implements RekamMedikService {
 
     @Autowired
     private RekamMedikRepository repository;
