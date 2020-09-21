@@ -1,5 +1,6 @@
 package com.bahagya.miniproject.repository;
 
+import java.util.List;
 import com.bahagya.miniproject.model.entity.RekamMedik;
 import org.springframework.data.jpa.repository.JpaRepository;
 
