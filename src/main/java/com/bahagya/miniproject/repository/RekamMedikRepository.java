@@ -13,4 +13,3 @@ public interface RekamMedikRepository extends JpaRepository<RekamMedik, Integer>
     List<RekamMedik> findAllByPasienIdObat(Integer idObaInteger);
 
 }
-s
