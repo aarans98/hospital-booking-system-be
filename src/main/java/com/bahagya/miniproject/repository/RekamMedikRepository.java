@@ -5,12 +5,12 @@ import com.bahagya.miniproject.model.entity.RekamMedik;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RekamMedikRepository extends JpaRepository<RekamMedik, Integer> {
-    List<RekamMedik> findAllByPasienIdPasien(Integer idPasienInteger);
+    List<RekamMedik> findAllByPasienIdPasien(Integer idPasien);
 
-    List<RekamMedik> findAllByPasienIdDokter(Integer idDokInteger);
+    List<RekamMedik> findAllByDokterIdDokter(Integer idDokter);
 
-    List<RekamMedik> findAllByPasienIdPrakter(Integer idPrakInteger);
+    List<RekamMedik> findAllByPraktekIdPraktek(Integer idPraktek);
 
-    List<RekamMedik> findAllByPasienIdObat(Integer idObaInteger);
+    List<RekamMedik> findAllByObatIdObat(Integer idObat);
 
 }
