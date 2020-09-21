@@ -15,7 +15,7 @@ public class Pasien {
     private Integer id_pasien;
 
     @Column(name = "nama")
-    private String nama_pasien;
+    private String nama_lengkap;
 
     @Column(name = "tgl_lahir")
     private Date tanggal_lahir;
@@ -33,6 +33,6 @@ public class Pasien {
     private Integer berat_badan;
     
     @Column(name = "usia")
-    private Integer umur;
+    private Integer usia;
     
 }
