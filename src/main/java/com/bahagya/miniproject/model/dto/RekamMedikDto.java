@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class RekamMedikDto {
-    private String id;
+    private Integer id;
     private Integer idPasien;
     private Integer idDokter;
     private String gejala;
