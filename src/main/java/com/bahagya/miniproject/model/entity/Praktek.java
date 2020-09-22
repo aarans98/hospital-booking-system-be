@@ -21,8 +21,8 @@ public class Praktek {
     @Column(name = "jadwal", nullable = false)
     private Date jadwal;
 
-    @OneToMany
-    @JoinColumn(name = "id_dokter", nullable = false, updatable = false)
-    private Dokter idDokter;
+    // @OneToMany
+    // @JoinColumn(name = "id_dokter", nullable = false, updatable = false)
+    // private Dokter idDokter;
 
 }
