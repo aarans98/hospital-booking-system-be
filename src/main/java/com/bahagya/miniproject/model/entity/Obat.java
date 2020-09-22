@@ -22,6 +22,6 @@ public class Obat {
     private String kategori;
 
     @ManyToMany
-    @JoinColumn(name="id_rekam_medik",insertable = false, updatable = false)
+    @JoinColumn(name = "id_rekam_medik", insertable = false, updatable = false)
     private RekamMedik rekamMedik;
-}
+
