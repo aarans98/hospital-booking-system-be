@@ -21,14 +21,14 @@ public class PasienAssembler implements InterfaceAssembler<Pasien, KunjunganDto>
 	            return null;
 
 	        Pasien entity = new Pasien();
-	        if (dto.getId_pasien() != null) {
-	            Optional<Pasien> temp = this.repository.findById(dto.getId_pasien());
+	        if (dto.getIdPasien() != null) {
+	            Optional<Pasien> temp = this.repository.findById(dto.getIdPasien());
 	            if(temp.isPresent()){
 	                entity = temp.get();
 	            }
 	        }
 
-	        if (dto.getId_pasien() != null) entity.setId_pasien(dto.getId_pasien());
+	        if (dto.getIdPasien() != null) entity.setIdPasien(dto.getIdPasien());
 	        if (dto.getNama_lengkap() != null) entity.setNama_lengkap(dto.getNama_lengkap());
 	        if (dto.getTanggal_lahir() != null) entity.setTanggal_lahir(dto.getTanggal_lahir());
 	        if (dto.getAlamat() != null) entity.setAlamat(dto.getAlamat());
@@ -45,7 +45,7 @@ public class PasienAssembler implements InterfaceAssembler<Pasien, KunjunganDto>
 	    public KunjunganDto fromEntity(Pasien entity) {
 	        if (entity == null) return null;
 	        return KunjunganDto.builder()
-	                .id_pasien(entity.getId_pasien())
+	                .idPasien(entity.getIdPasien())
 	                .nama_lengkap(entity.getNama_lengkap())
 	                .tanggal_lahir(entity.getTanggal_lahir())
 	                .alamat(entity.getAlamat())
