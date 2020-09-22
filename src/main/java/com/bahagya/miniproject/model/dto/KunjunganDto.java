@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class KunjunganDto {
-	private Integer id_pasien;
+	private Integer idPasien;
 	private String nama_lengkap;
 	private Date tanggal_lahir;
 	private String alamat;
