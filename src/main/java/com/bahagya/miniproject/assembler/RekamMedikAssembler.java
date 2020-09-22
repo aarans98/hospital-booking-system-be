@@ -47,14 +47,14 @@ public class RekamMedikAssembler implements InterfaceAssembler<RekamMedik, Rekam
         if (entity == null) return null;
         return RekamMedikDto.builder()
                 .id(entity.getIdRekamMedik())
-                .idPasien(entity.getPasien().getIdPasien)
+                .idPasien(entity.getPasien().getIdPasien())
                 .idDokter(entity.getDokter().getIdDokter())
                 .gejala(entity.getGejala())
                 .idPraktek(entity.getPraktek().getIdPraktek())
                 .tinggiBadan(entity.getTinggiBadan())
                 .beratBadan(entity.getBeratBadan())
                 .diagnosa(entity.getDiagnosa())
-                .idObat(entity.getObat().getIdObat)
+                .idObat(entity.getObat().getIdObat())
                 .dosis(entity.getDosis())
                 .build();
     }
