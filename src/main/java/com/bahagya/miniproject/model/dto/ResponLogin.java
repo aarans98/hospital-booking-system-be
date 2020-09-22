@@ -1,4 +1,3 @@
-
 package com.bahagya.miniproject.model.dto;
 
 import lombok.AllArgsConstructor;
@@ -10,12 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RegisterDto {
-//    private Integer id_user;
-    private String user_role;
-    private String username;
-    private String password;
-    private String email;
-
+public class ResponLogin {
+	private String user_role;
+	private boolean stat;
 }
-

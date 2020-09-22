@@ -8,14 +8,15 @@ import lombok.Data;
 @Entity
 @Table(name = "register")
 public class Register {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_user")
-    private Integer id_user;
-
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "id_user")
+//    private Integer id_user;
+	
     @Column(name = "user_role")
     private String user_role;
-
+    
+    @Id
     @Column(name = "username")
     private String username;
 
