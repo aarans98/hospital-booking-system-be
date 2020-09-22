@@ -53,7 +53,7 @@ public class RegisterController {
         	return responLogin;
         }
         else {
-        	if(password.equalsIgnoreCase(register.getPassword())) {
+        	if(password.equals(register.getPassword())) {
         	responLogin.setStat(true);
         	responLogin.setUser_role(register.getUser_role());
         	return responLogin;
