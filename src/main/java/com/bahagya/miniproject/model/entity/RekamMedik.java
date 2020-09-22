@@ -1,6 +1,8 @@
 package com.bahagya.miniproject.model.entity;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -8,7 +10,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "t_rekam_medik")
+@Table(name = "rekam_medik")
 public class RekamMedik {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,22 +24,22 @@ public class RekamMedik {
     @Column(name = "id_pasien", nullable = false)
     private Integer idPasien;
 
-    @OneToMany
-    @JoinColumn(name = "id_dokter", insertable = false, updatable = false)
-    private Dokter dokter;
+    // @ManyToOne
+    // @JoinColumn(name = "id_dokter", insertable = false, updatable = false)
+    // private Dokter dokter;
 
-    @Column(name = "id_dokter", nullable = false)
-    private Integer idDokter;
+    // @Column(name = "id_dokter", nullable = false)
+    // private Integer idDokter;
 
     @Column(name = "gejala")
     private String gejala;
 
-    @ManyToOne
-    @JoinColumn(name = "id_praktek", insertable = false, updatable = false)
-    private Praktek praktek;
+    // @OneToMany
+    // @JoinColumn(name = "id_praktek", insertable = false, updatable = false)
+    // private Set<Praktek> praktek;
 
-    @Column(name = "id_praktek", nullable = false)
-    private Integer idPraktek;
+    // @Column(name = "id_praktek", nullable = false)
+    // private Integer idPraktek;
 
     @Column(name = "tanggal_kunjungan")
     private Date tanggalKunjungan;
@@ -51,12 +53,15 @@ public class RekamMedik {
     @Column(name = "diagnosa")
     private String diagnosa;
 
-    @ManyToMany
-    @JoinColumn(name = "id_obat", insertable = false, updatable = false)
-    private Obat obat;
+    // @OneToMany
+    // @JoinColumn(name = "id_rm_obat", insertable = false, updatable = false)
+    // private RmObat rmObat;
 
-    @Column(name = "id_obat", nullable = false)
-    private Integer idObat;
+    // @Column(name = "id_rm_obat", nullable = false)
+    // private Integer idRmObat;
+
+    @ManyToMany(mappedBy = "rekamMedik", cascade = CascadeType.ALL)
+    private List<Obat> obat = new ArrayList<>();
 
     @Column(name = "dosis")
     private String dosis;
