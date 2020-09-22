@@ -1,4 +1,3 @@
-
 package com.bahagya.miniproject.model.entity;
 
 import java.sql.Date;
