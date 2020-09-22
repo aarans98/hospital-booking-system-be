@@ -7,7 +7,9 @@ import com.bahagya.miniproject.model.entity.Register;
 import com.bahagya.miniproject.repository.RegisterRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
+@CrossOrigin
 @Component
 public class RegisterAssembler implements InterfaceAssembler<Register, RegisterDto> {
     @Autowired
@@ -36,6 +38,8 @@ public class RegisterAssembler implements InterfaceAssembler<Register, RegisterD
             entity.setPassword(dto.getPassword());
         if (dto.getEmail() != null)
             entity.setEmail(dto.getEmail());
+        if (dto.getPasswordrep() != null)
+            entity.setPasswordrep(dto.getPasswordrep());
 
         return entity;
 
