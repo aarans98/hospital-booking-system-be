@@ -10,7 +10,11 @@ import com.bahagya.miniproject.repository.RegisterRepo;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.GetMapping;
+=======
+import org.springframework.web.bind.annotation.CrossOrigin;
+>>>>>>> refs/heads/development
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +22,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+<<<<<<< HEAD
 @RequestMapping
+=======
+@CrossOrigin
+@RequestMapping("/register")
+>>>>>>> refs/heads/development
 public class RegisterController {
     @Autowired
     private RegisterRepo repository;
