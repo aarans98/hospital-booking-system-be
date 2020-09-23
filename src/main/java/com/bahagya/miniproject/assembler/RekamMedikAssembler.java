@@ -1,18 +1,29 @@
 package com.bahagya.miniproject.assembler;
 
 import com.bahagya.miniproject.model.dto.RekamMedikDto;
+import com.bahagya.miniproject.model.entity.Obat;
 import com.bahagya.miniproject.model.entity.RekamMedik;
+import com.bahagya.miniproject.repository.ObatRepository;
 import com.bahagya.miniproject.repository.RekamMedikRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class RekamMedikAssembler implements InterfaceAssembler<RekamMedik, RekamMedikDto>{
 
     @Autowired
     private RekamMedikRepository repository;
+
+    @Autowired
+    private ObatRepository obatRepository;
+
+    @Autowired
+    private ObatAssembler assembler;
 
     @Override
     public RekamMedik fromDto(RekamMedikDto dto) {
@@ -29,14 +40,21 @@ public class RekamMedikAssembler implements InterfaceAssembler<RekamMedik, Rekam
 
         if (dto.getId() != null) entity.setIdRekamMedik(dto.getId());
         if (dto.getIdPasien() != null) entity.setIdPasien(dto.getIdPasien());
-        if (dto.getIdDokter() != null) entity.setIdDokter(dto.getIdDokter());
+        // if (dto.getIdDokter() != null) entity.setIdDokter(dto.getIdDokter());
         if (dto.getGejala() != null) entity.setGejala(dto.getGejala());
-        if (dto.getIdPraktek() != null) entity.setIdPraktek(dto.getIdPasien());
+        // if (dto.getIdPraktek() != null) entity.setIdPraktek(dto.getIdPasien());
         if (dto.getTanggalKunjungan() != null) entity.setTanggalKunjungan(dto.getTanggalKunjungan());
         if (dto.getTinggiBadan() != null) entity.setTinggiBadan(dto.getTinggiBadan());
         if (dto.getBeratBadan() != null) entity.setBeratBadan(dto.getBeratBadan());
         if (dto.getDiagnosa() != null) entity.setDiagnosa(dto.getDiagnosa());
-        if (dto.getIdObat() != null) entity.setIdObat(dto.getIdObat());
+        // if (!dto.getIdObat().isEmpty()){
+        //     List<Obat> newObat = new ArrayList<>();
+        //     for(int i = 0; i < dto.getIdObat().size(); i++){
+        //         Obat obat = obatRepository.findById(dto.getIdObat().get(i)).get();
+        //         newObat.add(obat);
+        //     }
+            
+        // } 
         if (dto.getDosis() != null) entity.setDosis(dto.getDosis());
 
         return entity;
@@ -47,14 +65,17 @@ public class RekamMedikAssembler implements InterfaceAssembler<RekamMedik, Rekam
         if (entity == null) return null;
         return RekamMedikDto.builder()
                 .id(entity.getIdRekamMedik())
-                .idPasien(entity.getPasien().getIdPasien)
-                .idDokter(entity.getDokter().getIdDokter())
+                .idPasien(entity.getPasien().getIdPasien())
+                // .idDokter(entity.getDokter().getIdDokter())
                 .gejala(entity.getGejala())
-                .idPraktek(entity.getPraktek().getIdPraktek())
+                // .idPraktek(entity.getPraktek().getIdPraktek())
                 .tinggiBadan(entity.getTinggiBadan())
                 .beratBadan(entity.getBeratBadan())
                 .diagnosa(entity.getDiagnosa())
-                .idObat(entity.getObat().getIdObat)
+                .tanggalKunjungan(entity.getTanggalKunjungan())
+                .idObat(entity.getRmObat().stream().map(obat -> obat.getObat().getIdObat()).collect(Collectors.toList()))
+                .namaObat(entity.getRmObat().stream().map(obat -> obat.getObat().getNamaObat()).collect(Collectors.toList()))
+                .deskripsi(entity.getRmObat().stream().map(obat -> obat.getObat().getDeskripsi()).collect(Collectors.toList()))
                 .dosis(entity.getDosis())
                 .build();
     }

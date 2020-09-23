@@ -15,12 +15,12 @@ public class Dokter {
     @Column(name = "id_dokter", nullable = false)
     private Integer idDokter;
 
-    @Column(name = "nama_lengkap", nullable = false)
+    @Column(name = "nama_lengkap")
     private String namaLengkap;
 
-    @Column(name = "tanggal_lahir", nullable = false)
+    @Column(name = "tanggal_lahir")
     private Date tanggalLahir;
 
-    @Column(name = "spesialisasi", nullable = false)
+    @Column(name = "spesialisasi")
     private String spesialisasi;
 }
