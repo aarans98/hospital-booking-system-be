@@ -22,6 +22,9 @@ public class RekamMedikAssembler implements InterfaceAssembler<RekamMedik, Rekam
     @Autowired
     private ObatRepository obatRepository;
 
+    @Autowired
+    private ObatAssembler assembler;
+
     @Override
     public RekamMedik fromDto(RekamMedikDto dto) {
         if(dto == null)
@@ -35,7 +38,7 @@ public class RekamMedikAssembler implements InterfaceAssembler<RekamMedik, Rekam
             }
         }
 
-        // if (dto.getId() != null) entity.setIdRekamMedik(dto.getId());
+        if (dto.getId() != null) entity.setIdRekamMedik(dto.getId());
         if (dto.getIdPasien() != null) entity.setIdPasien(dto.getIdPasien());
         // if (dto.getIdDokter() != null) entity.setIdDokter(dto.getIdDokter());
         if (dto.getGejala() != null) entity.setGejala(dto.getGejala());
@@ -44,11 +47,14 @@ public class RekamMedikAssembler implements InterfaceAssembler<RekamMedik, Rekam
         if (dto.getTinggiBadan() != null) entity.setTinggiBadan(dto.getTinggiBadan());
         if (dto.getBeratBadan() != null) entity.setBeratBadan(dto.getBeratBadan());
         if (dto.getDiagnosa() != null) entity.setDiagnosa(dto.getDiagnosa());
-        if (!dto.getIdObat().isEmpty()){
-            List<Obat> newObat = new ArrayList<>();
-            dto.getIdObat().stream().map(id -> {Obat obat = obatRepository.findById(id).get(); return obat;}).forEach(obat -> newObat.add(obat));
-            entity.setObat(newObat);
-        } 
+        // if (!dto.getIdObat().isEmpty()){
+        //     List<Obat> newObat = new ArrayList<>();
+        //     for(int i = 0; i < dto.getIdObat().size(); i++){
+        //         Obat obat = obatRepository.findById(dto.getIdObat().get(i)).get();
+        //         newObat.add(obat);
+        //     }
+            
+        // } 
         if (dto.getDosis() != null) entity.setDosis(dto.getDosis());
 
         return entity;
@@ -67,8 +73,9 @@ public class RekamMedikAssembler implements InterfaceAssembler<RekamMedik, Rekam
                 .beratBadan(entity.getBeratBadan())
                 .diagnosa(entity.getDiagnosa())
                 .tanggalKunjungan(entity.getTanggalKunjungan())
-                .namaObat(entity.getObat().stream().map(obat -> obat.getNamaObat()).collect(Collectors.toList()))
-                .deskripsi(entity.getObat().stream().map(obat -> obat.getDeskripsi()).collect(Collectors.toList()))
+                .idObat(entity.getRmObat().stream().map(obat -> obat.getObat().getIdObat()).collect(Collectors.toList()))
+                .namaObat(entity.getRmObat().stream().map(obat -> obat.getObat().getNamaObat()).collect(Collectors.toList()))
+                .deskripsi(entity.getRmObat().stream().map(obat -> obat.getObat().getDeskripsi()).collect(Collectors.toList()))
                 .dosis(entity.getDosis())
                 .build();
     }
