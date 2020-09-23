@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bahagya.miniproject.repository.PraktekRepository;
+import com.bahagya.miniproject.repository.PraktekRepo;
 import com.bahagya.miniproject.assembler.PraktekAssembler;
 import com.bahagya.miniproject.model.dto.PraktekDto;
 import com.bahagya.miniproject.model.entity.Praktek;
@@ -14,7 +14,7 @@ import com.bahagya.miniproject.model.entity.Praktek;
 public class PraktekServiceImpl implements PraktekService {
 	
 	@Autowired
-	private PraktekRepository repository;
+	private PraktekRepo repository;
 	@Autowired
 	private PraktekAssembler assembler;
 	
