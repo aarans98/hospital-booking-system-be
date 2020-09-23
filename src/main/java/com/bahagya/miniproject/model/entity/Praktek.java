@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import lombok.Data;
 
+
 @Data
 @Entity
 @Table(name = "praktek")

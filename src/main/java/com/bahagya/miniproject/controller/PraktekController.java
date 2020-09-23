@@ -16,14 +16,14 @@ import com.bahagya.miniproject.assembler.PraktekAssembler;
 import com.bahagya.miniproject.configuration.DefaultResponse;
 import com.bahagya.miniproject.model.dto.PraktekDto;
 import com.bahagya.miniproject.model.entity.Praktek;
-import com.bahagya.miniproject.repository.PraktekRepository;
+import com.bahagya.miniproject.repository.PraktekRepo;
 
 @RestController
 @RequestMapping("/praktek")
 public class PraktekController {
 	
 	@Autowired
-	private PraktekRepository repository;
+	private PraktekRepo repository;
 	@Autowired
 	private PraktekAssembler assembler;
 	

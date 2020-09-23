@@ -7,14 +7,14 @@ import org.springframework.stereotype.Component;
 
 import com.bahagya.miniproject.model.dto.PraktekDto;
 import com.bahagya.miniproject.model.entity.Praktek;
-import com.bahagya.miniproject.repository.PraktekRepository;
+import com.bahagya.miniproject.repository.PraktekRepo;
 
 
 @Component
 public class PraktekAssembler implements InterfaceAssembler<Praktek, PraktekDto> {
 	
 	@Autowired
-	private PraktekRepository repository;
+	private PraktekRepo repository;
 	
 	@Override
 	public Praktek fromDto(PraktekDto dto) {
