@@ -15,5 +15,6 @@ public class PraktekDto {
 	private Integer idPraktek;
 	private String poli;
 	private Date jadwal;
+	private String jam;
 	private Integer idDokter;
 }

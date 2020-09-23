@@ -1,7 +1,6 @@
 package com.bahagya.miniproject.controller;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +40,15 @@ public class PraktekController {
 	public DefaultResponse get(@PathVariable Integer id_praktek) {
 		PraktekDto praktekDto = assembler.fromEntity(repository.findById(id_praktek).get());
 		return DefaultResponse.ok(praktekDto);
+	}
+	
+	// http://localhost:1212/praktek/dokter/1
+	@GetMapping("/dokter/{id_dokter}")
+	public DefaultResponse getByDokter(@PathVariable Integer id_dokter) {
+		List<Praktek> praktekList = repository.findAllByDokterIdDokter(id_dokter);
+		List<PraktekDto> praktekDtoList = praktekList.stream().map(praktek -> assembler.fromEntity(praktek))
+				.collect(Collectors.toList());
+		return DefaultResponse.ok(praktekDtoList);
 	}
 	
 	// http://localhost:1212/praktek
