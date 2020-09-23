@@ -8,30 +8,13 @@ import lombok.Data;
 @Entity
 @Table(name = "register")
 public class Register {
-<<<<<<< HEAD
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "id_user")
-//    private Integer id_user;
+
 	
     @Column(name = "user_role")
-=======
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_user", nullable = false)
-    private Integer id_user;
-
-    @Column(name = "user_role", nullable = false, length = 6)
->>>>>>> refs/heads/development
     private String user_role;
-<<<<<<< HEAD
     
     @Id
-    @Column(name = "username")
-=======
-
     @Column(name = "username", nullable = false, length = 15)
->>>>>>> refs/heads/development
     private String username;
 
     @Column(name = "password", nullable = false, length = 12)
