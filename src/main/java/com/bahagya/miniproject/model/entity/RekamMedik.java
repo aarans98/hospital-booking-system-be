@@ -1,7 +1,6 @@
 package com.bahagya.miniproject.model.entity;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -13,7 +12,7 @@ import lombok.Data;
 @Table(name = "rekam_medik")
 public class RekamMedik {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_rekam_medik")
     private Integer idRekamMedik;
 
@@ -53,15 +52,11 @@ public class RekamMedik {
     @Column(name = "diagnosa")
     private String diagnosa;
 
-    // @OneToMany
-    // @JoinColumn(name = "id_rm_obat", insertable = false, updatable = false)
-    // private RmObat rmObat;
+    // @ManyToMany(mappedBy = "rekamMedik", cascade = CascadeType.ALL)
+    // private List<Obat> obat = new ArrayList<>();
 
-    // @Column(name = "id_rm_obat", nullable = false)
-    // private Integer idRmObat;
-
-    @ManyToMany(mappedBy = "rekamMedik", cascade = CascadeType.ALL)
-    private List<Obat> obat = new ArrayList<>();
+    @OneToMany(mappedBy = "rekamMedik")
+    private List<RmObat> rmObat;
 
     @Column(name = "dosis")
     private String dosis;

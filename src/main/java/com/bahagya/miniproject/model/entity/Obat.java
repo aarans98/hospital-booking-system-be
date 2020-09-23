@@ -2,10 +2,10 @@ package com.bahagya.miniproject.model.entity;
 
 import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
+
 
 @Data
 @Entity
@@ -24,9 +24,12 @@ public class Obat {
     @Column(name = "kategori")
     private String kategori;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "rm_obat",
-        joinColumns = @JoinColumn(name = "id_obat"),
-        inverseJoinColumns = @JoinColumn(name = "id_rekam_medik"))
-    private List<RekamMedik> rekamMedik = new ArrayList<>();
+    // @ManyToMany(cascade = CascadeType.ALL)
+    // @JoinTable(name = "rm_obat",
+    //     joinColumns = @JoinColumn(name = "id_obat"),
+    //     inverseJoinColumns = @JoinColumn(name = "id_rekam_medik"))
+    // private List<RekamMedik> rekamMedik = new ArrayList<>();
+
+    @OneToMany(mappedBy = "obat")
+    private List<RmObat> rmObat;
 }
