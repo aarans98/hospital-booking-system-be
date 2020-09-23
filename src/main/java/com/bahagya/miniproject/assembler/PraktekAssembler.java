@@ -9,6 +9,7 @@ import com.bahagya.miniproject.model.dto.PraktekDto;
 import com.bahagya.miniproject.model.entity.Praktek;
 import com.bahagya.miniproject.repository.PraktekRepository;
 
+
 @Component
 public class PraktekAssembler implements InterfaceAssembler<Praktek, PraktekDto> {
 	
