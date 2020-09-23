@@ -5,15 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class ListDokterDto {
-    private String idDokter;
+    private Integer idDokter;
     private String namaLengkap;
     private String spesialisasi;
-    private String idPraktek;
-    private String poli;
-    private String jadwal;
+    private Date tanggalLahir;
 }
