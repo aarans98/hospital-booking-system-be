@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
-@RequestMapping
+@RequestMapping("/register")
 public class RegisterController {
     @Autowired
     private RegisterRepo repository;
@@ -37,7 +37,7 @@ public class RegisterController {
     // }
 
     /* Insert Data */
-    @PostMapping("/register")
+    @PostMapping
     public DefaultResponse insert(@RequestBody RegisterDto dto) {
         Register register = assembler.fromDto(dto);
         repository.save(register);
