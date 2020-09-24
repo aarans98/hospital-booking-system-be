@@ -37,10 +37,8 @@ public class FormRmAssembler implements InterfaceAssembler<RekamMedik, FormRmDto
 
         if (dto.getId() != null) entity.setIdRekamMedik(dto.getId());
         if (dto.getIdPasien() != null) entity.setIdPasien(dto.getIdPasien());
-        if (dto.getIdDokter() != null) entity.setIdDokter(dto.getIdDokter());
         if (dto.getGejala() != null) entity.setGejala(dto.getGejala());
-        if (dto.getIdPraktek() != null) entity.setIdPraktek(dto.getIdPraktek());
-        if (dto.getTanggalKunjungan() != null) entity.setTanggalKunjungan(dto.getTanggalKunjungan());
+        if (dto.getIdJadwal() != null) entity.setIdJadwal(dto.getIdJadwal());
         if (dto.getTinggiBadan() != null) entity.setTinggiBadan(dto.getTinggiBadan());
         if (dto.getBeratBadan() != null) entity.setBeratBadan(dto.getBeratBadan());
         if (dto.getDiagnosa() != null) entity.setDiagnosa(dto.getDiagnosa());
@@ -55,14 +53,12 @@ public class FormRmAssembler implements InterfaceAssembler<RekamMedik, FormRmDto
         List<RmObat> rmObat = rmObatRepository.findAllByRekamMedikIdRekamMedik(entity.getIdRekamMedik());
         return FormRmDto.builder()
                 .id(entity.getIdRekamMedik())
-                .tanggalKunjungan(entity.getTanggalKunjungan())
                 .idPasien(entity.getIdPasien())
                 .tinggiBadan(entity.getTinggiBadan())
                 .beratBadan(entity.getBeratBadan())
                 .gejala(entity.getGejala())
                 .diagnosa(entity.getDiagnosa())
-                .idDokter(entity.getIdDokter())
-                .idPraktek(entity.getIdPraktek())
+                .idJadwal(entity.getIdJadwal())
                 .idObat(rmObat.stream().map(obat -> obat.getObat().getIdObat()).collect(Collectors.toList()))
                 .dosis(entity.getDosis())
                 .build();

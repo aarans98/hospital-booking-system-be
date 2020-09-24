@@ -1,7 +1,7 @@
 package com.bahagya.miniproject.model.entity;
 
-import java.sql.Date;
-import java.util.List;
+// import java.sql.Date;
+// import java.util.List;
 
 import javax.persistence.*;
 
@@ -23,25 +23,22 @@ public class RekamMedik {
     @Column(name = "id_pasien", nullable = false)
     private Integer idPasien;
 
-    @ManyToOne
-    @JoinColumn(name = "id_dokter", insertable = false, updatable = false)
-    private Dokter dokter;
+    // @ManyToOne
+    // @JoinColumn(name = "id_dokter", insertable = false, updatable = false)
+    // private Dokter dokter;
 
-    @Column(name = "id_dokter", nullable = false)
-    private Integer idDokter;
+    // @Column(name = "id_dokter", nullable = false)
+    // private Integer idDokter;
 
     @Column(name = "gejala")
     private String gejala;
 
     @OneToOne
-    @JoinColumn(name = "id_praktek", insertable = false, updatable = false)
-    private Praktek praktek;
+    @JoinColumn(name = "id_jadwal", insertable = false, updatable = false)
+    private JadwalDokter jadwalDokter;
 
-    @Column(name = "id_praktek", nullable = false)
-    private Integer idPraktek;
-
-    @Column(name = "tanggal_kunjungan")
-    private Date tanggalKunjungan;
+    @Column(name = "id_jadwal", nullable = false)
+    private Integer idJadwal;
 
     @Column(name = "tinggi_badan")
     private Integer tinggiBadan;

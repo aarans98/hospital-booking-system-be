@@ -1,6 +1,6 @@
 package com.bahagya.miniproject.model.dto;
 
-import java.sql.Date;
+// import java.sql.Date;
 
 import java.util.List;
 
@@ -16,9 +16,7 @@ import lombok.NoArgsConstructor;
 public class FormRmDto {
     private Integer id;
     private Integer idPasien;
-    private Integer idDokter;
-    private Integer idPraktek;
-    private Date tanggalKunjungan;
+    private Integer idJadwal;
     private Integer tinggiBadan;
     private Integer beratBadan;
     private String gejala;
