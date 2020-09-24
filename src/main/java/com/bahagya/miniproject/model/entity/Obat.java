@@ -30,6 +30,6 @@ public class Obat {
     //     inverseJoinColumns = @JoinColumn(name = "id_rekam_medik"))
     // private List<RekamMedik> rekamMedik = new ArrayList<>();
 
-    @OneToMany(mappedBy = "obat")
-    private List<RmObat> rmObat;
+    // @OneToMany(mappedBy = "obat")
+    // private List<RmObat> rmObat;
 }

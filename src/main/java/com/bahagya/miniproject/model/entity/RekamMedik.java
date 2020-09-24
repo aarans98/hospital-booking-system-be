@@ -52,8 +52,8 @@ public class RekamMedik {
     @Column(name = "diagnosa")
     private String diagnosa;
 
-    @OneToMany(mappedBy = "rekamMedik")
-    private List<RmObat> rmObat;
+    // @OneToMany(mappedBy = "rekamMedik")
+    // private List<RmObat> rmObat;
 
     @Column(name = "dosis")
     private String dosis;
