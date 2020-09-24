@@ -35,6 +35,7 @@ public class PraktekAssembler implements InterfaceAssembler<Praktek, PraktekDto>
 			entity.setJadwal(dto.getJadwal());
 		if (dto.getIdDokter() != null)
 			entity.setIdDokter(dto.getIdDokter());
+
 		if (dto.getJam() != null)
 			entity.setJam(dto.getJam());
 		return entity;
