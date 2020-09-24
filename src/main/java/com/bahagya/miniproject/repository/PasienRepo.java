@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.bahagya.miniproject.model.entity.Pasien;
 
 @Repository
-public interface PasienRepo extends JpaRepository<Pasien, Integer>  {
+public interface PasienRepo extends JpaRepository<Pasien, Integer> {
 
 }
-

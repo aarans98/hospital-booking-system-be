@@ -5,4 +5,5 @@ import com.bahagya.miniproject.model.entity.Register;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RegisterRepo extends JpaRepository<Register, String> {
+	
 }

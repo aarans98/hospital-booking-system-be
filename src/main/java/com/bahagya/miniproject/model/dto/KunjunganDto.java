@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class KunjunganDto {
 	private Integer idPasien;
+	private Integer idDokter;
+	private Integer idPraktek;
 	private String nama_lengkap;
 	private Date tanggal_lahir;
 	private String alamat;

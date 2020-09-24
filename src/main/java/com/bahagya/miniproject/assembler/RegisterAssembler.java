@@ -1,15 +1,12 @@
 
 package com.bahagya.miniproject.assembler;
 
-// import java.util.Optional;
 import com.bahagya.miniproject.model.dto.RegisterDto;
 import com.bahagya.miniproject.model.entity.Register;
 import com.bahagya.miniproject.repository.RegisterRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
-@CrossOrigin
 @Component
 public class RegisterAssembler implements InterfaceAssembler<Register, RegisterDto> {
     @Autowired
@@ -28,8 +25,8 @@ public class RegisterAssembler implements InterfaceAssembler<Register, RegisterD
         // }
 
         Register entity = new Register();
-        if (dto.getId_user() != null)
-            entity.setId_user(dto.getId_user());
+//        if (dto.getId_user() != null)
+//            entity.setId_user(dto.getId_user());
         if (dto.getUser_role() != null)
             entity.setUser_role(dto.getUser_role());
         if (dto.getUsername() != null)
@@ -38,18 +35,17 @@ public class RegisterAssembler implements InterfaceAssembler<Register, RegisterD
             entity.setPassword(dto.getPassword());
         if (dto.getEmail() != null)
             entity.setEmail(dto.getEmail());
-        if (dto.getPasswordrep() != null)
-            entity.setPasswordrep(dto.getPasswordrep());
 
         return entity;
 
     }
+    
 
     @Override
     public RegisterDto fromEntity(Register entity) {
         if (entity == null)
             return null;
-        return RegisterDto.builder().id_user(entity.getId_user()).user_role(entity.getUser_role())
+        return RegisterDto.builder()
                 .username(entity.getUsername()).password(entity.getPassword()).email(entity.getEmail()).build();
     }
 

@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bahagya.miniproject.assembler.PasienAssembler;
 import com.bahagya.miniproject.configuration.DefaultResponse;
 import com.bahagya.miniproject.model.dto.KunjunganDto;
+import com.bahagya.miniproject.model.entity.JadwalDokter;
 import com.bahagya.miniproject.model.entity.Pasien;
+import com.bahagya.miniproject.repository.JadwalDokterRepo;
 import com.bahagya.miniproject.repository.PasienRepo;
 
 @RestController
@@ -23,6 +25,8 @@ public class PasienController {
 	
 	    @Autowired
 	    private PasienRepo repository;
+	    @Autowired
+	    private JadwalDokterRepo repositori;
 	    @Autowired
 	    private PasienAssembler assembler;
 
@@ -47,6 +51,11 @@ public class PasienController {
 	    public DefaultResponse insert(@RequestBody KunjunganDto dto) {
 	        Pasien pasien = assembler.fromDto(dto);
 	        repository.save(pasien);
+	        JadwalDokter jd=new JadwalDokter();
+	        jd.setIdDokter(dto.getIdDokter());
+	        jd.setIdPraktek(dto.getIdPraktek());
+	        jd.setNama_lengkap(dto.getNama_lengkap());
+	        repositori.save(jd);
 	        return DefaultResponse.ok(dto);
 	    }
 }

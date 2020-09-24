@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class RegisterDto {
-    private Integer id_user;
+//    private Integer id_user;
     private String user_role;
     private String username;
     private String password;
