@@ -9,41 +9,43 @@ import com.bahagya.miniproject.model.dto.PraktekDto;
 import com.bahagya.miniproject.model.entity.Praktek;
 import com.bahagya.miniproject.repository.PraktekRepo;
 
-
 @Component
 public class PraktekAssembler implements InterfaceAssembler<Praktek, PraktekDto> {
-	
+
 	@Autowired
 	private PraktekRepo repository;
-	
+
 	@Override
 	public Praktek fromDto(PraktekDto dto) {
 		if (dto == null)
 			return null;
 		Praktek entity = new Praktek();
 		if (dto.getIdPraktek() != null) {
-            Optional<Praktek> temp = this.repository.findById(dto.getIdPraktek());
-            if(temp.isPresent()){
-                entity = temp.get();
-            }
+			Optional<Praktek> temp = this.repository.findById(dto.getIdPraktek());
+			if (temp.isPresent()) {
+				entity = temp.get();
+			}
 		}
-		
-		if (dto.getIdPraktek() != null) entity.setIdPraktek(dto.getIdPraktek());
-		if (dto.getPoli() != null) entity.setPoli(dto.getPoli());
-		if (dto.getJadwal() != null) entity.setJadwal(dto.getJadwal());
-		if (dto.getIdDokter() != null) entity.setIdDokter(dto.getIdDokter());
+
+		if (dto.getIdPraktek() != null)
+			entity.setIdPraktek(dto.getIdPraktek());
+		if (dto.getPoli() != null)
+			entity.setPoli(dto.getPoli());
+		if (dto.getJadwal() != null)
+			entity.setJadwal(dto.getJadwal());
+		if (dto.getIdDokter() != null)
+			entity.setIdDokter(dto.getIdDokter());
+		if (dto.getJam() != null)
+			entity.setJam(dto.getJam());
 		return entity;
 	}
-	
+
 	@Override
 	public PraktekDto fromEntity(Praktek entity) {
-		if (entity == null) return null;
-		return PraktekDto.builder()
-				.idPraktek(entity.getIdPraktek())
-				.poli(entity.getPoli())
-				.jadwal(entity.getJadwal())
-				.idDokter(entity.getDokter().getIdDokter())
-				.build();
+		if (entity == null)
+			return null;
+		return PraktekDto.builder().idPraktek(entity.getIdPraktek()).poli(entity.getPoli()).jadwal(entity.getJadwal())
+				.idDokter(entity.getDokter().getIdDokter()).jam(entity.getJam()).build();
 	}
-	
+
 }
