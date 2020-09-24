@@ -23,7 +23,7 @@ public class RekamMedikDto {
     private String gejala;
     private String poli;
     private Date jadwal;
-    private Date tanggalKunjungan;
+    private String jam;
     private Integer tinggiBadan;
     private Integer beratBadan;
     private String diagnosa;
