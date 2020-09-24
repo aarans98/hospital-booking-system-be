@@ -2,7 +2,7 @@ package com.bahagya.miniproject.model.entity;
 
 import lombok.Data;
 
-import java.util.List;
+// import java.util.List;
 
 import javax.persistence.*;
 
