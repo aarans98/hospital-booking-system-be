@@ -9,10 +9,9 @@ import lombok.Data;
 @Table(name = "register")
 public class Register {
 
-	
-    @Column(name = "user_role")
+    @Column(name = "user_role", nullable = false)
     private String user_role;
-    
+
     @Id
     @Column(name = "username", nullable = false, length = 15)
     private String username;

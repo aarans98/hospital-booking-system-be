@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/dokter")
 public class ListDokterController {
 
@@ -23,13 +24,13 @@ public class ListDokterController {
     private ListDokterAssembler assembler;
 
     @GetMapping
-    public DefaultResponse get(){
+    public DefaultResponse get() {
         List<Dokter> praktekList = repository.findAll();
-        List<ListDokterDto> listDokterDto = praktekList.stream()
-                .map(dokter -> assembler.fromEntity(dokter))
+        List<ListDokterDto> listDokterDto = praktekList.stream().map(dokter -> assembler.fromEntity(dokter))
                 .collect(Collectors.toList());
         return DefaultResponse.ok(listDokterDto);
     }
+
     @PostMapping
     public DefaultResponse insert(@RequestBody ListDokterDto dto) {
         Dokter dokter = assembler.fromDto(dto);

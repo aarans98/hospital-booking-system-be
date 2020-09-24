@@ -25,28 +25,29 @@ public class RegisterAssembler implements InterfaceAssembler<Register, RegisterD
         // }
 
         Register entity = new Register();
-//        if (dto.getId_user() != null)
-//            entity.setId_user(dto.getId_user());
+        // if (dto.getId_user() != null)
+        // entity.setId_user(dto.getId_user());
         if (dto.getUser_role() != null)
             entity.setUser_role(dto.getUser_role());
         if (dto.getUsername() != null)
             entity.setUsername(dto.getUsername());
         if (dto.getPassword() != null)
             entity.setPassword(dto.getPassword());
+        if (dto.getPasswordrep() != null)
+            entity.setPasswordrep(dto.getPasswordrep());
         if (dto.getEmail() != null)
             entity.setEmail(dto.getEmail());
 
         return entity;
 
     }
-    
 
     @Override
     public RegisterDto fromEntity(Register entity) {
         if (entity == null)
             return null;
-        return RegisterDto.builder()
-                .username(entity.getUsername()).password(entity.getPassword()).email(entity.getEmail()).build();
+        return RegisterDto.builder().username(entity.getUsername()).password(entity.getPassword())
+                .email(entity.getEmail()).build();
     }
 
 }
