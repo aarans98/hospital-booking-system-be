@@ -50,5 +50,14 @@ public class PraktekController {
 		repository.save(praktek);
 		return DefaultResponse.ok(dto);
 	}
+	
+	// http://localhost:1212/praktek/dokter/1
+	@GetMapping("/dokter/{id_dokter}")
+	public DefaultResponse getByDokter(@PathVariable Integer id_dokter) {
+		List<Praktek> praktekList = repository.findAllByDokterIdDokter(id_dokter);
+		List<PraktekDto> praktekDtoList = praktekList.stream().map(praktek -> assembler.fromEntity(praktek))
+				.collect(Collectors.toList());
+		return DefaultResponse.ok(praktekDtoList);
+	}
 
 }
