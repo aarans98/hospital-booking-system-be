@@ -9,4 +9,6 @@ public interface RmObatRepository extends JpaRepository<RmObat, Integer> {
 
     List<RmObat> findAllByRekamMedikIdRekamMedik(Integer idRekamMedik);
 
+    List<RmObat> findAllByObatIdObat(String idObat);
+
 }
