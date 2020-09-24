@@ -9,8 +9,8 @@ public interface RekamMedikRepository extends JpaRepository<RekamMedik, Integer>
 
     // List<RekamMedik> findAllByDokterIdDokter(Integer idDokter);
 
-    // List<RekamMedik> findAllByPraktekIdPraktek(Integer idPraktek);
+    RekamMedik findAllByJadwalDokterId(Integer idJadwal);
 
-    // List<RekamMedik> findAllByObatIdObat(Integer idObat);
+    // List<RekamMedik> findAllByObatIdObat(String idObat);
 
 }

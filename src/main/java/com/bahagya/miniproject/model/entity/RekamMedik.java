@@ -1,7 +1,7 @@
 package com.bahagya.miniproject.model.entity;
 
-import java.sql.Date;
-import java.util.List;
+// import java.sql.Date;
+// import java.util.List;
 
 import javax.persistence.*;
 
@@ -33,15 +33,12 @@ public class RekamMedik {
     @Column(name = "gejala")
     private String gejala;
 
-    // @OneToMany
-    // @JoinColumn(name = "id_praktek", insertable = false, updatable = false)
-    // private Set<Praktek> praktek;
+    @OneToOne
+    @JoinColumn(name = "id_jadwal", insertable = false, updatable = false)
+    private JadwalDokter jadwalDokter;
 
-    // @Column(name = "id_praktek", nullable = false)
-    // private Integer idPraktek;
-
-    @Column(name = "tanggal_kunjungan")
-    private Date tanggalKunjungan;
+    @Column(name = "id_jadwal", nullable = false)
+    private Integer idJadwal;
 
     @Column(name = "tinggi_badan")
     private Integer tinggiBadan;
@@ -52,11 +49,8 @@ public class RekamMedik {
     @Column(name = "diagnosa")
     private String diagnosa;
 
-    // @ManyToMany(mappedBy = "rekamMedik", cascade = CascadeType.ALL)
-    // private List<Obat> obat = new ArrayList<>();
-
-    @OneToMany(mappedBy = "rekamMedik")
-    private List<RmObat> rmObat;
+    // @OneToMany(mappedBy = "rekamMedik")
+    // private List<RmObat> rmObat;
 
     @Column(name = "dosis")
     private String dosis;
