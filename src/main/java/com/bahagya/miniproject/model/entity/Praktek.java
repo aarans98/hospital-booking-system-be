@@ -20,15 +20,14 @@ public class Praktek {
 
     @Column(name = "jadwal", nullable = false)
     private Date jadwal;
-    
+
     @Column(name = "jam")
     private String jam;
 
     @ManyToOne
     @JoinColumn(name = "id_dokter", insertable = false, updatable = false)
     private Dokter dokter;
-    
+
     @Column(name = "id_dokter", nullable = false)
     private Integer idDokter;
-
 }
