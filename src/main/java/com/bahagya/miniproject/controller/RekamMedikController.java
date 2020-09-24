@@ -1,6 +1,7 @@
 package com.bahagya.miniproject.controller;
 
 import com.bahagya.miniproject.configuration.DefaultResponse;
+import com.bahagya.miniproject.model.dto.FormRmDto;
 import com.bahagya.miniproject.model.dto.RekamMedikDto;
 import com.bahagya.miniproject.model.entity.RekamMedik;
 import com.bahagya.miniproject.model.entity.RmObat;
@@ -8,6 +9,7 @@ import com.bahagya.miniproject.repository.RekamMedikRepository;
 import com.bahagya.miniproject.repository.RmObatRepository;
 import com.bahagya.miniproject.service.RekamMedikService;
 import com.bahagya.miniproject.assembler.RekamMedikAssembler;
+import com.bahagya.miniproject.assembler.FormRmAssembler;
 import com.bahagya.miniproject.assembler.RmObatAssembler;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,8 @@ public class RekamMedikController {
     private RekamMedikService service;
     @Autowired
     private RekamMedikAssembler assembler;
+    @Autowired
+    private FormRmAssembler formRmAssembler;
     @Autowired
     private RmObatAssembler rmObatAssambler;
     @Autowired
@@ -54,24 +58,24 @@ public class RekamMedikController {
         return DefaultResponse.ok(rekamMedikDtoList);
     }
 
-    // @GetMapping("/dokter/{idDokter}")
-    // public DefaultResponse getByDokter(@PathVariable Integer idDokter) {
-    //     List<RekamMedik> rekamMedikList = repository.findAllByDokterIdDokter(idDokter);
-    //     List<RekamMedikDto> rekamMedikDtoList = rekamMedikList.stream().map(rekamMedik -> assembler.fromEntity(rekamMedik))
-    //             .collect(Collectors.toList());
-    //     return DefaultResponse.ok(rekamMedikDtoList);
-    // }
+    @GetMapping("/dokter/{idDokter}")
+    public DefaultResponse getByDokter(@PathVariable Integer idDokter) {
+        List<RekamMedik> rekamMedikList = repository.findAllByDokterIdDokter(idDokter);
+        List<RekamMedikDto> rekamMedikDtoList = rekamMedikList.stream().map(rekamMedik -> assembler.fromEntity(rekamMedik))
+                .collect(Collectors.toList());
+        return DefaultResponse.ok(rekamMedikDtoList);
+    }
 
-    // @GetMapping("/praktek/{idPraktek}")
-    // public DefaultResponse getByPraktek(@PathVariable Integer idPraktek) {
-    //     List<RekamMedik> rekamMedikList = repository.findAllByPraktekIdPraktek(idPraktek);
-    //     List<RekamMedikDto> rekamMedikDtoList = rekamMedikList.stream().map(rekamMedik -> assembler.fromEntity(rekamMedik))
-    //             .collect(Collectors.toList());
-    //     return DefaultResponse.ok(rekamMedikDtoList);
-    // }
+    @GetMapping("/praktek/{idPraktek}")
+    public DefaultResponse getByPraktek(@PathVariable Integer idPraktek) {
+        List<RekamMedik> rekamMedikList = repository.findAllByPraktekIdPraktek(idPraktek);
+        List<RekamMedikDto> rekamMedikDtoList = rekamMedikList.stream().map(rekamMedik -> assembler.fromEntity(rekamMedik))
+                .collect(Collectors.toList());
+        return DefaultResponse.ok(rekamMedikDtoList);
+    }
 
     // @GetMapping("/obat/{idObat}")
-    // public DefaultResponse getByObat(@PathVariable Integer idObat) {
+    // public DefaultResponse getByObat(@PathVariable String idObat) {
     //     List<RekamMedik> rekamMedikList = repository.findAllByObatIdObat(idObat);
     //     List<RekamMedikDto> rekamMedikDtoList = rekamMedikList.stream().map(rekamMedik -> assembler.fromEntity(rekamMedik))
     //             .collect(Collectors.toList());
@@ -79,8 +83,8 @@ public class RekamMedikController {
     // }
 
     @PostMapping
-    public DefaultResponse insert(@RequestBody RekamMedikDto dto) {
-        RekamMedik rekamMedik = assembler.fromDto(dto);
+    public DefaultResponse insert(@RequestBody FormRmDto dto) {
+        RekamMedik rekamMedik = formRmAssembler.fromDto(dto);
         repository.save(rekamMedik);
         if (!dto.getIdObat().isEmpty()){
             for(int i = 0; i < dto.getIdObat().size(); i++){
@@ -88,11 +92,11 @@ public class RekamMedikController {
                 rmObatRepository.save(rmObat);
             }
         }
-        return DefaultResponse.ok(assembler.fromEntity(rekamMedik));
+        return DefaultResponse.ok(dto);
     }
 
     @PostMapping("/trx")
-    public DefaultResponse insertTrx(@RequestBody RekamMedikDto dto) {
+    public DefaultResponse insertTrx(@RequestBody FormRmDto dto) {
         return DefaultResponse.ok(service.insertRekamMedik(dto));
     }
 

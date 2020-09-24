@@ -1,0 +1,63 @@
+package com.bahagya.miniproject.assembler;
+
+import com.bahagya.miniproject.model.dto.FormRmDto;
+import com.bahagya.miniproject.model.entity.RekamMedik;
+import com.bahagya.miniproject.repository.RekamMedikRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Component
+public class FormRmAssembler implements InterfaceAssembler<RekamMedik, FormRmDto>{
+
+    @Autowired
+    private RekamMedikRepository repository;
+
+    @Override
+    public RekamMedik fromDto(FormRmDto dto) {
+        if(dto == null)
+            return null;
+    
+        RekamMedik entity = new RekamMedik();
+        if(dto.getId() != null){
+            Optional<RekamMedik> temp = this.repository.findById(dto.getId());
+            if(temp.isPresent()){
+                entity = temp.get();
+            }
+        }
+
+        if (dto.getId() != null) entity.setIdRekamMedik(dto.getId());
+        if (dto.getIdPasien() != null) entity.setIdPasien(dto.getIdPasien());
+        if (dto.getIdDokter() != null) entity.setIdDokter(dto.getIdDokter());
+        if (dto.getGejala() != null) entity.setGejala(dto.getGejala());
+        if (dto.getIdPraktek() != null) entity.setIdPraktek(dto.getIdPasien());
+        if (dto.getTanggalKunjungan() != null) entity.setTanggalKunjungan(dto.getTanggalKunjungan());
+        if (dto.getTinggiBadan() != null) entity.setTinggiBadan(dto.getTinggiBadan());
+        if (dto.getBeratBadan() != null) entity.setBeratBadan(dto.getBeratBadan());
+        if (dto.getDiagnosa() != null) entity.setDiagnosa(dto.getDiagnosa());
+        if (dto.getDosis() != null) entity.setDosis(dto.getDosis());
+
+        return entity;
+    }
+
+    @Override
+    public FormRmDto fromEntity(RekamMedik entity) {
+        if (entity == null) return null;
+        return FormRmDto.builder()
+                .id(entity.getIdRekamMedik())
+                .tanggalKunjungan(entity.getTanggalKunjungan())
+                .idPasien(entity.getPasien().getIdPasien())
+                .tinggiBadan(entity.getTinggiBadan())
+                .beratBadan(entity.getBeratBadan())
+                .gejala(entity.getGejala())
+                .diagnosa(entity.getDiagnosa())
+                .idDokter(entity.getDokter().getIdDokter())
+                .idPraktek(entity.getPraktek().getIdPraktek())
+                .idObat(entity.getRmObat().stream().map(obat -> obat.getObat().getIdObat()).collect(Collectors.toList()))
+                .dosis(entity.getDosis())
+                .build();
+    }
+    
+}
