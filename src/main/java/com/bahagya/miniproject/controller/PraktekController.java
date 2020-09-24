@@ -21,12 +21,12 @@ import com.bahagya.miniproject.repository.PraktekRepo;
 @RestController
 @RequestMapping("/praktek")
 public class PraktekController {
-	
+
 	@Autowired
 	private PraktekRepo repository;
 	@Autowired
 	private PraktekAssembler assembler;
-	
+
 	// http://localhost:1212/praktek
 	@GetMapping
 	public DefaultResponse get() {
@@ -35,14 +35,14 @@ public class PraktekController {
 				.collect(Collectors.toList());
 		return DefaultResponse.ok(praktekDtoList);
 	}
-	
+
 	// http://localhost:1212/praktek/1
 	@GetMapping("/{id_praktek}")
 	public DefaultResponse get(@PathVariable Integer id_praktek) {
 		PraktekDto praktekDto = assembler.fromEntity(repository.findById(id_praktek).get());
 		return DefaultResponse.ok(praktekDto);
 	}
-	
+
 	// http://localhost:1212/praktek
 	@PostMapping
 	public DefaultResponse insert(@RequestBody PraktekDto dto) {
@@ -50,4 +50,5 @@ public class PraktekController {
 		repository.save(praktek);
 		return DefaultResponse.ok(dto);
 	}
+
 }
