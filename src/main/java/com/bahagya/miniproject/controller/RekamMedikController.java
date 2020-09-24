@@ -92,7 +92,7 @@ public class RekamMedikController {
                 rmObatRepository.save(rmObat);
             }
         }
-        return DefaultResponse.ok(dto);
+        return DefaultResponse.ok(formRmAssembler.fromEntity(rekamMedik));
     }
 
     @PostMapping("/trx")
