@@ -31,6 +31,15 @@ public class ObatController {
         return DefaultResponse.ok(ObatDtoList);
     }
 
+    @GetMapping("/idObat")
+    public List<String> getIdObat() {
+        List<Obat> ObatList = repository.findAll();
+        List<ObatDto> ObatDtoList = ObatList.stream()
+                .map(Obat -> assembler.fromEntity(Obat)).collect(Collectors.toList());
+        List<String> IdObatList = ObatDtoList.stream().map(Obat -> Obat.getIdObat()).collect(Collectors.toList());
+        return IdObatList;
+    }
+
     @PostMapping
     public DefaultResponse insert(@RequestBody ObatDto dto) {
         Obat Obat = assembler.fromDto(dto);
