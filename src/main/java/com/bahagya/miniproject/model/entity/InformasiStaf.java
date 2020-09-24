@@ -18,7 +18,10 @@ public class InformasiStaf {
 
     @Column(name = "nama_lengkap", nullable = false)
     private String namaLengkap;
-
+    
+    @Column(name = "user_name", nullable = false, unique = true)
+    private String userName;
+    
     @Column(name = "tanggal_lahir", nullable = false)
     private Date tanggalLahir;
 
