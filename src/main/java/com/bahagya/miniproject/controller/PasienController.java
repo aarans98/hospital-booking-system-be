@@ -55,6 +55,7 @@ public class PasienController {
 	        jd.setIdDokter(dto.getIdDokter());
 	        jd.setIdPraktek(dto.getIdPraktek());
 	        jd.setNama_lengkap(dto.getNama_lengkap());
+	        jd.setUsername(dto.getUsername());
 	        repositori.save(jd);
 	        return DefaultResponse.ok(dto);
 	    }

@@ -14,6 +14,13 @@ public class Dokter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_dokter", nullable = false)
     private Integer idDokter;
+    
+    @OneToOne
+ 	@JoinColumn(name = "username", nullable = false, insertable=false, updatable=false)
+    private Register register;
+	
+	@Column(name="username", nullable = false)
+    private String username;
 
     @Column(name = "nama_lengkap")
     private String namaLengkap;
