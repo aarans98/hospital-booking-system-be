@@ -29,6 +29,7 @@ public class ListDokterAssembler implements InterfaceAssembler<Dokter, ListDokte
         }
 
         if (dto.getIdDokter() != null) entity.setIdDokter(dto.getIdDokter());
+        if (dto.getUsername() != null) entity.setUsername(dto.getUsername());
         if (dto.getNamaLengkap() != null) entity.setNamaLengkap(dto.getNamaLengkap());
         if (dto.getSpesialisasi() != null) entity.setSpesialisasi(dto.getSpesialisasi());
         if (dto.getTanggalLahir() != null) entity.setTanggalLahir(dto.getTanggalLahir());
@@ -41,6 +42,7 @@ public class ListDokterAssembler implements InterfaceAssembler<Dokter, ListDokte
             if(entity == null) return null;
         return ListDokterDto.builder()
                 .idDokter(entity.getIdDokter())
+                .username(entity.getUsername())
                 .namaLengkap(entity.getNamaLengkap())
                 .spesialisasi(entity.getSpesialisasi())
                 .tanggalLahir(entity.getTanggalLahir())

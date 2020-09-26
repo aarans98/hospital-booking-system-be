@@ -33,9 +33,13 @@ public class ListDokterController {
 
     @PostMapping
     public DefaultResponse insert(@RequestBody ListDokterDto dto) {
+    	if(repository.findByUsername(dto.getUsername()).isEmpty()){
         Dokter dokter = assembler.fromDto(dto);
         repository.save(dokter);
         return DefaultResponse.ok(assembler.fromEntity(dokter));
+    	}
+    	return DefaultResponse.error("Username sudah digunakan");
+    	//usernamme belum terdaftar belom bisa
     }
 
 }

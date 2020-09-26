@@ -25,10 +25,13 @@ public class JadwalDokter {
 		
 		@Column(name="idPraktek", nullable = false)
 	    private Integer idPraktek;
-		
-//		@ManyToOne
-//	 	@JoinColumn(name = "idPasien", nullable=false)
-//	    private Pasien pasien;
+		 
+		@ManyToOne
+		@JoinColumn(name = "username", nullable = false,insertable=false, updatable=false)
+		private Register register;
+			
+		@Column(name="username", nullable = false)
+		private String username;
 
 	    @Column(name = "pasien", nullable = false)
 	    private String nama_lengkap;
