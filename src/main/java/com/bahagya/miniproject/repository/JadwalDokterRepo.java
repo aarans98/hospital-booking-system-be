@@ -10,11 +10,13 @@ import com.bahagya.miniproject.model.entity.JadwalDokter;
 
 @Repository
 public interface JadwalDokterRepo extends JpaRepository<JadwalDokter, Integer> {
-	List<JadwalDokter> findByUsername(String username);
+	List<JadwalDokter> findAllByUsername(String username);
 
     List<JadwalDokter> findAllByDokterIdDokter(Integer idDokter);
 
     List<JadwalDokter> findAllByPraktekIdPraktek(Integer idPraktek);
+
+    List<JadwalDokter> findAllByDokterUsername(String username);
     
     
     @Query(

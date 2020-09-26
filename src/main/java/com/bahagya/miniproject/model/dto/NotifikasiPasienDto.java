@@ -10,9 +10,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class NotifikasiDto {
-	private String namaLengkap;
+public class NotifikasiPasienDto {
+	private String nama_lengkap;
+	private String namaDokter;
+	private String jam;
+	private Date tanggalKunjungan;
 	private String spesialisasi;
-	private String nama;
-	private String username;
+
+
 }
