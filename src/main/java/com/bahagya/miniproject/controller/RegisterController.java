@@ -56,6 +56,7 @@ public class RegisterController {
             if (password.equals(register.getPassword())) {
                 responLogin.setStat(true);
                 responLogin.setUser_role(register.getUser_role());
+                responLogin.setUsername(register.getUsername());
                 return responLogin;
             } else {
                 responLogin.setStat(true);
