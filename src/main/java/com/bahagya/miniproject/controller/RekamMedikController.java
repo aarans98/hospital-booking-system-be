@@ -55,23 +55,43 @@ public class RekamMedikController {
         return DefaultResponse.ok(rekamMedikDto);
     }
 
-    @GetMapping("/pasien/{idPasien}")
-    public DefaultResponse getByPasien(@PathVariable Integer idPasien) {
-        List<RekamMedik> rekamMedikList = repository.findAllByPasienIdPasien(idPasien);
-        List<RekamMedikDto> rekamMedikDtoList = rekamMedikList.stream()
-                .map(rekamMedik -> assembler.fromEntity(rekamMedik)).collect(Collectors.toList());
-        return DefaultResponse.ok(rekamMedikDtoList);
-    }
-
-    @GetMapping("/dokter/{idDokter}")
-    public DefaultResponse getByDokter(@PathVariable Integer idDokter) {
-        List<JadwalDokter> jadwalDokterList = jdRepository.findAllByDokterIdDokter(idDokter);
+    @GetMapping("/pasien/{user}")
+    public List<RekamMedikDto> getUserPasien(@PathVariable String user ){
+        List<JadwalDokter> jadwalDokterList = jdRepository.findAllByUsername(user);
         List<RekamMedik> rekamMedikList = jadwalDokterList.stream()
             .map(jd -> repository.findAllByJadwalDokterId(jd.getId())).collect(Collectors.toList());
         List<RekamMedikDto> rekamMedikDtoList = rekamMedikList.stream().map(rekamMedik -> assembler.fromEntity(rekamMedik))
             .collect(Collectors.toList());
-        return DefaultResponse.ok(rekamMedikDtoList);
+        return rekamMedikDtoList;
     }
+
+    // @GetMapping("/pasien/{idPasien}")
+    // public DefaultResponse getByPasien(@PathVariable Integer idPasien) {
+    //     List<RekamMedik> rekamMedikList = repository.findAllByPasienIdPasien(idPasien);
+    //     List<RekamMedikDto> rekamMedikDtoList = rekamMedikList.stream()
+    //             .map(rekamMedik -> assembler.fromEntity(rekamMedik)).collect(Collectors.toList());
+    //     return DefaultResponse.ok(rekamMedikDtoList);
+    // }
+
+    @GetMapping("/dokter/{user}")
+    public List<RekamMedikDto> getUserDokter(@PathVariable String user ){
+        List<JadwalDokter> jadwalDokterList = jdRepository.findAllByDokterUsername(user);
+        List<RekamMedik> rekamMedikList = jadwalDokterList.stream()
+            .map(jd -> repository.findAllByJadwalDokterId(jd.getId())).collect(Collectors.toList());
+        List<RekamMedikDto> rekamMedikDtoList = rekamMedikList.stream().map(rekamMedik -> assembler.fromEntity(rekamMedik))
+            .collect(Collectors.toList());
+        return rekamMedikDtoList;
+    }
+
+    // @GetMapping("/dokter/{idDokter}")
+    // public DefaultResponse getByDokter(@PathVariable Integer idDokter) {
+    //     List<JadwalDokter> jadwalDokterList = jdRepository.findAllByDokterIdDokter(idDokter);
+    //     List<RekamMedik> rekamMedikList = jadwalDokterList.stream()
+    //         .map(jd -> repository.findAllByJadwalDokterId(jd.getId())).collect(Collectors.toList());
+    //     List<RekamMedikDto> rekamMedikDtoList = rekamMedikList.stream().map(rekamMedik -> assembler.fromEntity(rekamMedik))
+    //         .collect(Collectors.toList());
+    //     return DefaultResponse.ok(rekamMedikDtoList);
+    // }
 
     @GetMapping("/praktek/{idPraktek}")
     public DefaultResponse getByPraktek(@PathVariable Integer idPraktek) {
