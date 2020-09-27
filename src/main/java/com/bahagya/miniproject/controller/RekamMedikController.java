@@ -95,6 +95,12 @@ public class RekamMedikController {
         RekamMedik rekamMedik = formRmAssembler.fromDto(dto);
         repository.save(rekamMedik);
         if (!dto.getIdObat().isEmpty()) {
+            List<RmObat> temp = rmObatRepository.findAllByRekamMedikIdRekamMedik(dto.getId());
+            if (!temp.isEmpty()) {
+                for (int i = 0; i < temp.size(); i++) {
+                    rmObatRepository.deleteById(temp.get(i).getIdRmObat());
+                }
+            }
             for (int i = 0; i < dto.getIdObat().size(); i++) {
                 RmObat rmObat = rmObatAssambler.toEntity(dto.getId(), dto.getIdObat().get(i));
                 rmObatRepository.save(rmObat);
