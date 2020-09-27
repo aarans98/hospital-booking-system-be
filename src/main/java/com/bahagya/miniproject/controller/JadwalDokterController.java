@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins="http://localhost:3000")
 @RequestMapping("/jadwal")
 public class JadwalDokterController {
     @Autowired
@@ -61,6 +62,12 @@ public class JadwalDokterController {
         return data;
     }
 
+    @GetMapping("/id")
+    public List<Integer> getIdJadwalDokter() {
+        List<JadwalDokter> JadwalDokterList = repository.findAll();
+        List<Integer> IdJadwalDokterList = JadwalDokterList.stream().map(jd -> jd.getId()).collect(Collectors.toList());
+        return IdJadwalDokterList;
+    }
 
 
 }
