@@ -13,7 +13,8 @@ import java.sql.Date;
 public class NotifikasiDokterDto {
     private String nama_lengkap;
 //    private String jenisKelamin;
-    private Integer idPasien;
+    private Integer idJadwalDokter;
+    // private Integer idPasien;
     private String jam;
     private Date tanggalKunjungan;
 
