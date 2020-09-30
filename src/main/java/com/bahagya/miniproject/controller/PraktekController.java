@@ -19,7 +19,7 @@ import com.bahagya.miniproject.model.dto.PraktekDto;
 import com.bahagya.miniproject.model.entity.Praktek;
 import com.bahagya.miniproject.repository.PraktekRepo;
 
-@CrossOrigin(origins = "http://localhost:3001")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/praktek")
 public class PraktekController {
@@ -37,13 +37,14 @@ public class PraktekController {
 				.collect(Collectors.toList());
 		return DefaultResponse.ok(praktekDtoList);
 	}
-	@GetMapping
-	public DefaultResponse getAll() {
-		List<Praktek> praktekList = repository.findAll();
-		List<PraktekDto> praktekDtoList = praktekList.stream().map(praktek -> assembler.fromEntity(praktek))
-				.collect(Collectors.toList());
-		return DefaultResponse.ok(praktekDtoList);
-	}
+	// @GetMapping
+	// public DefaultResponse getAll() {
+	// List<Praktek> praktekList = repository.findAll();
+	// List<PraktekDto> praktekDtoList = praktekList.stream().map(praktek ->
+	// assembler.fromEntity(praktek))
+	// .collect(Collectors.toList());
+	// return DefaultResponse.ok(praktekDtoList);
+	// }
 
 	// http://localhost:1212/praktek/1
 	@GetMapping("/{id_praktek}")

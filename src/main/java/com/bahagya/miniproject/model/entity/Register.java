@@ -13,7 +13,7 @@ public class Register {
     private String user_role;
 
     @Id
-    @Column(name = "username", nullable = false, length = 15)
+    @Column(name = "username", nullable = false, length = 15, unique=true)
     private String username;
 
     @Column(name = "password", nullable = false, length = 12)
