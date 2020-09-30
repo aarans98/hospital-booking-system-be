@@ -39,28 +39,12 @@ public class PraktekController {
 				.collect(Collectors.toList());
 		return DefaultResponse.ok(praktekDtoList);
 	}
-	// @GetMapping
-	// public DefaultResponse getAll() {
-	// List<Praktek> praktekList = repository.findAll();
-	// List<PraktekDto> praktekDtoList = praktekList.stream().map(praktek ->
-	// assembler.fromEntity(praktek))
-	// .collect(Collectors.toList());
-	// return DefaultResponse.ok(praktekDtoList);
-	// }
 
 	// http://localhost:1212/praktek/1
 	@GetMapping("/{id_praktek}")
 	public DefaultResponse get(@PathVariable Integer id_praktek) {
 		PraktekDto praktekDto = assembler.fromEntity(repository.findById(id_praktek).get());
 		return DefaultResponse.ok(praktekDto);
-	}
-
-	@GetMapping("/dokter/{id_dokter}")
-	public DefaultResponse getByDokter(@PathVariable Integer id_dokter) {
-		List<Praktek> praktekList = repository.findAllByDokterIdDokter(id_dokter);
-		List<PraktekDto> praktekDtoList = praktekList.stream().map(praktek -> assembler.fromEntity(praktek))
-				.collect(Collectors.toList());
-		return DefaultResponse.ok(praktekDtoList);
 	}
 
 	// http://localhost:1212/praktek
