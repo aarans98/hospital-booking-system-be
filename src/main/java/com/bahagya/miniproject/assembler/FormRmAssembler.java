@@ -9,6 +9,7 @@ import com.bahagya.miniproject.repository.RmObatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -51,6 +52,10 @@ public class FormRmAssembler implements InterfaceAssembler<RekamMedik, FormRmDto
     public FormRmDto fromEntity(RekamMedik entity) {
         if (entity == null) return null;
         List<RmObat> rmObat = rmObatRepository.findAllByRekamMedikIdRekamMedik(entity.getIdRekamMedik());
+        List<String> obatId = new ArrayList<>();
+        if(!rmObat.isEmpty()){
+            obatId = rmObat.stream().map(obat -> obat.getObat().getIdObat()).collect(Collectors.toList());
+        }
         return FormRmDto.builder()
                 .id(entity.getIdRekamMedik())
                 .idPasien(entity.getIdPasien())
@@ -59,7 +64,7 @@ public class FormRmAssembler implements InterfaceAssembler<RekamMedik, FormRmDto
                 .gejala(entity.getGejala())
                 .diagnosa(entity.getDiagnosa())
                 .idJadwal(entity.getIdJadwal())
-                .idObat(rmObat.stream().map(obat -> obat.getObat().getIdObat()).collect(Collectors.toList()))
+                .idObat(obatId)
                 .dosis(entity.getDosis())
                 .build();
     }

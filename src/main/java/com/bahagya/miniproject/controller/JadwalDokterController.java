@@ -53,6 +53,7 @@ public class JadwalDokterController {
         for (int i = 0; i< notifikasiList.size(); i++){
             NotifikasiDokterDto jd = new NotifikasiDokterDto();
 //            jd.setIdPasien(notifikasiList.get(i));
+            jd.setIdJadwalDokter(notifikasiList.get(i).getId());
             jd.setNama_lengkap(notifikasiList.get(i).getNama_lengkap());
             jd.setJam(notifikasiList.get(i).getPraktek().getJam());
             jd.setTanggalKunjungan(notifikasiList.get(i).getPraktek().getJadwal());

@@ -49,21 +49,27 @@ public class RegisterController {
         ResponLogin responLogin = new ResponLogin();
         Register register = repository.findById(username).get();
         if (register == null) {
-            responLogin.setStat(false);
+            responLogin.setStatus(false);
             responLogin.setUser_role(null);
             return responLogin;
         } else {
             if (password.equals(register.getPassword())) {
-                responLogin.setStat(true);
+                responLogin.setStatus(true);
                 responLogin.setUser_role(register.getUser_role());
                 responLogin.setUsername(register.getUsername());
                 return responLogin;
             } else {
-                responLogin.setStat(true);
+                responLogin.setStatus(true);
                 responLogin.setUser_role(null);
                 return responLogin;
             }
         }
+    }
+    
+    @GetMapping("/cek")
+    public Register getAll(@RequestParam String username) {
+        Register register = repository.findById(username).get();
+        return register;
     }
 
 }
