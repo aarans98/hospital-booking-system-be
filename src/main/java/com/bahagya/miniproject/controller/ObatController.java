@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@CrossOrigin
+@CrossOrigin(origins="http://localhost:3000")
 @RestController
 @RequestMapping("/obat")
 public class ObatController {
@@ -31,7 +31,7 @@ public class ObatController {
         return DefaultResponse.ok(ObatDtoList);
     }
 
-    @GetMapping("/idObat")
+    @GetMapping("/id")
     public List<String> getIdObat() {
         List<Obat> ObatList = repository.findAll();
         List<ObatDto> ObatDtoList = ObatList.stream()
