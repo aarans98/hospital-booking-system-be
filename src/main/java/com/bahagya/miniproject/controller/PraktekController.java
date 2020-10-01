@@ -1,10 +1,12 @@
 package com.bahagya.miniproject.controller;
 
 import java.util.List;
+
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,14 +39,6 @@ public class PraktekController {
 				.collect(Collectors.toList());
 		return DefaultResponse.ok(praktekDtoList);
 	}
-	// @GetMapping
-	// public DefaultResponse getAll() {
-	// List<Praktek> praktekList = repository.findAll();
-	// List<PraktekDto> praktekDtoList = praktekList.stream().map(praktek ->
-	// assembler.fromEntity(praktek))
-	// .collect(Collectors.toList());
-	// return DefaultResponse.ok(praktekDtoList);
-	// }
 
 	// http://localhost:1212/praktek/1
 	@GetMapping("/{id_praktek}")
@@ -53,20 +47,21 @@ public class PraktekController {
 		return DefaultResponse.ok(praktekDto);
 	}
 
-	@GetMapping("/dokter/{id_dokter}")
-	public DefaultResponse getByDokter(@PathVariable Integer id_dokter) {
-		List<Praktek> praktekList = repository.findAllByDokterIdDokter(id_dokter);
-		List<PraktekDto> praktekDtoList = praktekList.stream().map(praktek -> assembler.fromEntity(praktek))
-				.collect(Collectors.toList());
-		return DefaultResponse.ok(praktekDtoList);
-	}
-
 	// http://localhost:1212/praktek
 	@PostMapping
 	public DefaultResponse insert(@RequestBody PraktekDto dto) {
 		Praktek praktek = assembler.fromDto(dto);
 		repository.save(praktek);
 		return DefaultResponse.ok(dto);
+	}
+	
+	// http://localhost:1212/praktek/dokter/1
+	@GetMapping("/dokter/{id_dokter}")
+	public List<PraktekDto> getByDokter(@PathVariable Integer id_dokter) {
+		List<Praktek> praktekList = repository.findAllByDokterIdDokter(id_dokter);
+		List<PraktekDto> praktekDtoList = praktekList.stream().map(praktek -> assembler.fromEntity(praktek))
+				.collect(Collectors.toList());
+		return praktekDtoList;
 	}
 
 }
