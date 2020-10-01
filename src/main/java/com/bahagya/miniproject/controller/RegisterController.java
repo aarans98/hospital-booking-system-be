@@ -56,7 +56,7 @@ public class RegisterController {
     @GetMapping("/login")
     public ResponLogin get(@RequestParam String username, String password) {
         ResponLogin responLogin = new ResponLogin();
-        Register register = repository.findById(username).get();
+        Register register = repository.findByUsername(username);
         if (register == null) {
             responLogin.setStatus(false);
             responLogin.setUser_role(null);
