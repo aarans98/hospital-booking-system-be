@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ResponLogin {
 	private String user_role;
-	private boolean stat;
+	private boolean status;
 	private String username;
 }

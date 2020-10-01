@@ -13,7 +13,11 @@ public class Register {
     private String user_role;
 
     @Id
-    @Column(name = "username", nullable = false, length = 15)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_username")
+    private Integer idUsername;
+    s
+    @Column(name = "username", nullable = false, length = 15, unique = true)
     private String username;
 
     @Column(name = "password", nullable = false, length = 12)
