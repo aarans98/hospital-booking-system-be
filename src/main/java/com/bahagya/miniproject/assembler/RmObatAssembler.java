@@ -1,13 +1,10 @@
 package com.bahagya.miniproject.assembler;
 
-import java.util.List;
-
 import com.bahagya.miniproject.model.entity.Obat;
 import com.bahagya.miniproject.model.entity.RekamMedik;
 import com.bahagya.miniproject.model.entity.RmObat;
 import com.bahagya.miniproject.repository.ObatRepository;
 import com.bahagya.miniproject.repository.RekamMedikRepository;
-import com.bahagya.miniproject.repository.RmObatRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,8 +12,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class RmObatAssembler {
 
-    @Autowired
-    private RmObatRepository repository;
+    // @Autowired
+    // private RmObatRepository repository;
 
     @Autowired
     private RekamMedikRepository rmRepository;
