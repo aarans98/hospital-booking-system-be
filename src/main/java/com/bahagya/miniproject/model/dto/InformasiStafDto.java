@@ -17,5 +17,4 @@ public class InformasiStafDto {
     private String posisi;
     private Date mulaiBekerja;
     private Integer gaji;
-    private String userName;
 }

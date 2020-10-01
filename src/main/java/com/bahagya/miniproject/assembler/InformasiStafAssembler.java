@@ -29,7 +29,6 @@ public class InformasiStafAssembler implements InterfaceAssembler<InformasiStaf,
 		
 		if (dto.getIdStaf() != null) entity.setIdStaf(dto.getIdStaf());
 		if (dto.getNamaLengkap() != null) entity.setNamaLengkap(dto.getNamaLengkap());
-		if (dto.getUserName() != null) entity.setUserName(dto.getUserName());
 		if (dto.getTanggalLahir() != null) entity.setTanggalLahir(dto.getTanggalLahir());
 		if (dto.getPosisi() != null) entity.setPosisi(dto.getPosisi());
 		if (dto.getMulaiBekerja() != null) entity.setMulaiBekerja(dto.getMulaiBekerja());
@@ -44,7 +43,6 @@ public class InformasiStafAssembler implements InterfaceAssembler<InformasiStaf,
 		return InformasiStafDto.builder()
 				.idStaf(entity.getIdStaf())
 				.namaLengkap(entity.getNamaLengkap())
-				.userName(entity.getUserName())
 				.tanggalLahir(entity.getTanggalLahir())
 				.posisi(entity.getPosisi())
 				.mulaiBekerja(entity.getMulaiBekerja())
