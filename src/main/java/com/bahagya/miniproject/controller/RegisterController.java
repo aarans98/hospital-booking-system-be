@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,6 +45,14 @@ public class RegisterController {
         return DefaultResponse.ok(dto);
     }
 
+    @PostMapping("/forgot")
+    public Register forgot(@RequestParam String username, String password) {
+        Register register = repository.findById(username).get();
+        register.setPassword(password);
+        repository.save(register);
+        return register;
+    }
+
     @GetMapping("/login")
     public ResponLogin get(@RequestParam String username, String password) {
         ResponLogin responLogin = new ResponLogin();
@@ -60,12 +69,13 @@ public class RegisterController {
                 return responLogin;
             } else {
                 responLogin.setStatus(true);
+                responLogin.setUsername(register.getUsername());
                 responLogin.setUser_role(null);
                 return responLogin;
             }
         }
     }
-    
+
     @GetMapping("/cek")
     public Register getAll(@RequestParam String username) {
         Register register = repository.findById(username).get();
