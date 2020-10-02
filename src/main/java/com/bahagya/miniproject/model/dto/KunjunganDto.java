@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class KunjunganDto {
+	private String username;
 	private Integer idPasien;
 	private Integer idDokter;
 	private Integer idPraktek;

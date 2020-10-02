@@ -37,6 +37,8 @@ public class RegisterAssembler implements InterfaceAssembler<Register, RegisterD
             entity.setPasswordrep(dto.getPasswordrep());
         if (dto.getEmail() != null)
             entity.setEmail(dto.getEmail());
+        if (dto.getFullname() != null)
+            entity.setFullname(dto.getFullname());
 
         return entity;
 
@@ -47,7 +49,7 @@ public class RegisterAssembler implements InterfaceAssembler<Register, RegisterD
         if (entity == null)
             return null;
         return RegisterDto.builder().username(entity.getUsername()).password(entity.getPassword())
-                .email(entity.getEmail()).build();
+                .email(entity.getEmail()).fullname(entity.getFullname()).build();
     }
 
 }

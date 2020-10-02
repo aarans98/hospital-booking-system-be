@@ -17,9 +17,12 @@ import com.bahagya.miniproject.assembler.RmObatAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+@CrossOrigin(origins="http://localhost:3000")
 @RestController
 @RequestMapping("/rekam-medik")
 public class RekamMedikController {
@@ -38,7 +41,7 @@ public class RekamMedikController {
     @Autowired
     private JadwalDokterRepo jdRepository;
 
-    // http://localhost:8080/rekam-medik
+    // http://localhost:1212/v1/app/rekam-medik
     @GetMapping
     public DefaultResponse get() {
         List<RekamMedik> rekamMedikList = repository.findAll();
@@ -47,39 +50,43 @@ public class RekamMedikController {
         return DefaultResponse.ok(rekamMedikDtoList);
     }
 
-    // http://localhost:8080/rekam-medik/1
+    // http://localhost:1212/v1/app/rekam-medik/1
     @GetMapping("/{id}")
     public DefaultResponse get(@PathVariable Integer id) {
         RekamMedikDto rekamMedikDto = assembler.fromEntity(repository.findById(id).get());
         return DefaultResponse.ok(rekamMedikDto);
     }
 
-    @GetMapping("/pasien/{idPasien}")
-    public DefaultResponse getByPasien(@PathVariable Integer idPasien) {
-        List<RekamMedik> rekamMedikList = repository.findAllByPasienIdPasien(idPasien);
-        List<RekamMedikDto> rekamMedikDtoList = rekamMedikList.stream()
-                .map(rekamMedik -> assembler.fromEntity(rekamMedik)).collect(Collectors.toList());
-        return DefaultResponse.ok(rekamMedikDtoList);
-    }
-
-    @GetMapping("/dokter/{idDokter}")
-    public DefaultResponse getByDokter(@PathVariable Integer idDokter) {
-        List<JadwalDokter> jadwalDokterList = jdRepository.findAllByDokterIdDokter(idDokter);
-        List<RekamMedik> rekamMedikList = jadwalDokterList.stream()
-            .map(jd -> repository.findAllByJadwalDokterId(jd.getId())).collect(Collectors.toList());
+    // http://localhost:1212/v1/app/rekam-medik/pasien/username
+    @GetMapping("/pasien/{user}")
+    public List<RekamMedikDto> getUserPasien(@PathVariable String user ){
+        List<JadwalDokter> jadwalDokterList = jdRepository.findAllByUsername(user);
+        List<RekamMedik> rekamMedikList = new ArrayList<>();
+        for(int i = 0; i < jadwalDokterList.size(); i++){
+            Optional<RekamMedik> temp = repository.findAllByJadwalDokterId(jadwalDokterList.get(i).getId());
+            if(temp.isPresent()){
+                rekamMedikList.add(temp.get());
+            }
+        }
         List<RekamMedikDto> rekamMedikDtoList = rekamMedikList.stream().map(rekamMedik -> assembler.fromEntity(rekamMedik))
             .collect(Collectors.toList());
-        return DefaultResponse.ok(rekamMedikDtoList);
+        return rekamMedikDtoList;
     }
 
-    @GetMapping("/praktek/{idPraktek}")
-    public DefaultResponse getByPraktek(@PathVariable Integer idPraktek) {
-        List<JadwalDokter> jadwalDokterList = jdRepository.findAllByPraktekIdPraktek(idPraktek);
-        List<RekamMedik> rekamMedikList = jadwalDokterList.stream()
-            .map(jd -> repository.findAllByJadwalDokterId(jd.getId())).collect(Collectors.toList());
+    // http://localhost:1212/v1/app/rekam-medik/dokter/username
+    @GetMapping("/dokter/{user}")
+    public List<RekamMedikDto> getUserDokter(@PathVariable String user ){
+        List<JadwalDokter> jadwalDokterList = jdRepository.findAllByDokterUsername(user);
+        List<RekamMedik> rekamMedikList = new ArrayList<>();
+        for(int i = 0; i < jadwalDokterList.size(); i++){
+            Optional<RekamMedik> temp = repository.findAllByJadwalDokterId(jadwalDokterList.get(i).getId());
+            if(temp.isPresent()){
+                rekamMedikList.add(temp.get());
+            }
+        }
         List<RekamMedikDto> rekamMedikDtoList = rekamMedikList.stream().map(rekamMedik -> assembler.fromEntity(rekamMedik))
             .collect(Collectors.toList());
-        return DefaultResponse.ok(rekamMedikDtoList);
+        return rekamMedikDtoList;
     }
 
     @GetMapping("/obat/{idObat}")
@@ -94,6 +101,12 @@ public class RekamMedikController {
         RekamMedik rekamMedik = formRmAssembler.fromDto(dto);
         repository.save(rekamMedik);
         if (!dto.getIdObat().isEmpty()) {
+            List<RmObat> temp = rmObatRepository.findAllByRekamMedikIdRekamMedik(dto.getId());
+            if (!temp.isEmpty()) {
+                for (int i = 0; i < temp.size(); i++) {
+                    rmObatRepository.deleteById(temp.get(i).getIdRmObat());
+                }
+            }
             for (int i = 0; i < dto.getIdObat().size(); i++) {
                 RmObat rmObat = rmObatAssambler.toEntity(dto.getId(), dto.getIdObat().get(i));
                 rmObatRepository.save(rmObat);

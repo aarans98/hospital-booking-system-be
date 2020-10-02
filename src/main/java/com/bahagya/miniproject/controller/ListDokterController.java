@@ -31,11 +31,27 @@ public class ListDokterController {
         return DefaultResponse.ok(listDokterDto);
     }
 
+    @GetMapping("/{id}")
+    public DefaultResponse get(@PathVariable Integer id) {
+        ListDokterDto listDokterDto = assembler.fromEntity(repository.findById(id).get());
+        return DefaultResponse.ok(listDokterDto);
+    }
+
     @PostMapping
     public DefaultResponse insert(@RequestBody ListDokterDto dto) {
+    	if(repository.findByUsername(dto.getUsername()).isEmpty()){
         Dokter dokter = assembler.fromDto(dto);
         repository.save(dokter);
-        return DefaultResponse.ok(assembler.fromEntity(dokter));
+        return DefaultResponse.ok(dto);
+    	}
+    	return DefaultResponse.error("Username sudah digunakan");
+//    	usernamme belum terdaftar belom bisa
     }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Integer id) {
+        repository.deleteById(id);
+    }
+
 
 }

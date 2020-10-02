@@ -4,14 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.sql.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ResponLogin {
-	private String user_role;
-	private boolean status;
-	private String fullname;
-	private String username;
+public class JumlahDto {
+    private int jumlah;
 }

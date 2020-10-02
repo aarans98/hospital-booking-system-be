@@ -6,15 +6,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ListDokterDto {
-	private String username;
-    private Integer idDokter;
-    private String namaLengkap;
-    private String spesialisasi;
-    private Date tanggalLahir;
+public class NotifikasiDokterDto {
+    private String nama_lengkap;
+//    private String jenisKelamin;
+    private Integer idJadwalDokter;
+    // private Integer idPasien;
+    private String jam;
+    private Date tanggalKunjungan;
+
 }
