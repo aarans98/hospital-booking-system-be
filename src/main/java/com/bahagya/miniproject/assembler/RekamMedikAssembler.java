@@ -8,6 +8,7 @@ import com.bahagya.miniproject.repository.RmObatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +21,12 @@ public class RekamMedikAssembler {
     public RekamMedikDto fromEntity(RekamMedik entity) {
         if (entity == null) return null;
         List<RmObat> rmObat = rmObatRepository.findAllByRekamMedikIdRekamMedik(entity.getIdRekamMedik());
+        List<String> obatNama = new ArrayList<>();
+        List<String> obatDeskripsi = new ArrayList<>();
+        if(!rmObat.isEmpty()){
+            obatNama = rmObat.stream().map(obat -> obat.getObat().getNamaObat()).collect(Collectors.toList());
+            obatDeskripsi = rmObat.stream().map(obat -> obat.getObat().getDeskripsi()).collect(Collectors.toList());
+        }
         return RekamMedikDto.builder()
                 .id(entity.getIdRekamMedik())
                 .namaPasien(entity.getPasien().getNama_lengkap())
@@ -34,8 +41,8 @@ public class RekamMedikAssembler {
                 .poli(entity.getJadwalDokter().getPraktek().getPoli())
                 .jadwal(entity.getJadwalDokter().getPraktek().getJadwal())
                 .jam(entity.getJadwalDokter().getPraktek().getJam())
-                .namaObat(rmObat.stream().map(obat -> obat.getObat().getNamaObat()).collect(Collectors.toList()))
-                .deskripsi(rmObat.stream().map(obat -> obat.getObat().getDeskripsi()).collect(Collectors.toList()))
+                .namaObat(obatNama)
+                .deskripsi(obatDeskripsi)
                 .dosis(entity.getDosis())
                 .build();
     }

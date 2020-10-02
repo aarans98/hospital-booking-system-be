@@ -1,5 +1,6 @@
 package com.bahagya.miniproject.repository;
 
+
 import com.bahagya.miniproject.model.entity.Register;
 import org.springframework.data.jpa.repository.JpaRepository;
 
