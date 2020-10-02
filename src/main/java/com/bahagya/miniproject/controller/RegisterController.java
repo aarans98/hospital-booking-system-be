@@ -8,6 +8,9 @@ import com.bahagya.miniproject.model.dto.ResponLogin;
 import com.bahagya.miniproject.model.entity.Register;
 import com.bahagya.miniproject.repository.RegisterRepo;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -39,18 +42,33 @@ public class RegisterController {
 
     /* Insert Data */
     @PostMapping
-    public DefaultResponse insert(@RequestBody RegisterDto dto) {
-        Register register = assembler.fromDto(dto);
-        repository.save(register);
-        return DefaultResponse.ok(dto);
+    public Register insert(@RequestBody RegisterDto dto) {
+    List<Register> registerList = repository.findAll();
+    List<Boolean> regCheck = registerList.stream().map(x -> x.getUsername().equals(dto.getUsername()))
+                .collect(Collectors.toList());
+        Register register = new Register();
+        if (!regCheck.contains(true)){
+            register = assembler.fromDto(dto);
+            repository.save(register);
+        }
+        return register;
     }
 
     @PostMapping("/forgot")
-    public Register forgot(@RequestParam String username, String password) {
+    public ResponLogin forgot(@RequestParam String username, String password, String passwordrep) {
+    	ResponLogin respon=new ResponLogin();
         Register register = repository.findById(username).get();
+        if(password.equals(passwordrep)) {
         register.setPassword(password);
+        register.setPasswordrep(passwordrep);
         repository.save(register);
-        return register;
+        respon.setStatus(true);
+        return respon;
+        }
+        else {
+        	respon.setStatus(false);
+        	return respon;
+        }
     }
 
     @GetMapping("/login")
@@ -66,6 +84,7 @@ public class RegisterController {
                 responLogin.setStatus(true);
                 responLogin.setUser_role(register.getUser_role());
                 responLogin.setUsername(register.getUsername());
+                responLogin.setFullname(register.getFullname());
                 return responLogin;
             } else {
                 responLogin.setStatus(true);
@@ -74,12 +93,6 @@ public class RegisterController {
                 return responLogin;
             }
         }
-    }
-
-    @GetMapping("/cek")
-    public Register getAll(@RequestParam String username) {
-        Register register = repository.findById(username).get();
-        return register;
     }
 
 }
