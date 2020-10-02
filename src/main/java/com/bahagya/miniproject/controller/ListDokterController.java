@@ -39,13 +39,13 @@ public class ListDokterController {
 
     @PostMapping
     public DefaultResponse insert(@RequestBody ListDokterDto dto) {
-//    	if(repository.findByUsername(dto.getUsername()).isEmpty()){
+    	if(repository.findByUsername(dto.getUsername()).isEmpty()){
         Dokter dokter = assembler.fromDto(dto);
         repository.save(dokter);
         return DefaultResponse.ok(dto);
-//    	}
-//    	return DefaultResponse.error("Username sudah digunakan");
-    	//usernamme belum terdaftar belom bisa
+    	}
+    	return DefaultResponse.error("Username sudah digunakan");
+//    	usernamme belum terdaftar belom bisa
     }
 
     @DeleteMapping("/{id}")
