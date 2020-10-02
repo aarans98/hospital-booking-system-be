@@ -12,13 +12,16 @@ public class Register {
     @Column(name = "user_role", nullable = false)
     private String user_role;
 
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "id_username")
+//    private Integer idUsername;
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_username")
-    private Integer idUsername;
-    s
     @Column(name = "username", nullable = false, length = 15, unique = true)
     private String username;
+    
+    @Column(name = "namaLengkap", nullable = false)
+    private String fullname;
 
     @Column(name = "password", nullable = false, length = 12)
     private String password;
