@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import com.bahagya.miniproject.model.entity.JadwalDokter;
+import com.bahagya.miniproject.repository.JadwalDokterRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +30,8 @@ public class PraktekController {
 
 	@Autowired
 	private PraktekRepo repository;
+	@Autowired
+	private JadwalDokterRepo jadwalDokterRepository;
 	@Autowired
 	private PraktekAssembler assembler;
 
@@ -62,6 +66,20 @@ public class PraktekController {
 		List<PraktekDto> praktekDtoList = praktekList.stream().map(praktek -> assembler.fromEntity(praktek))
 				.collect(Collectors.toList());
 		return praktekDtoList;
+	}
+
+	@GetMapping("/praktek/idJadwalDokter")
+	public List<Integer> getIdPraktek() {
+		List<JadwalDokter> jadwalDokterList = jadwalDokterRepository.findAll();
+		List<Integer> idPraktek = jadwalDokterList.stream()
+				.map(rm -> rm.getIdPraktek()).collect(Collectors.toList());
+		return idPraktek;
+	}
+
+	@GetMapping("available/{idDokter}")
+	public List<Praktek> getPraktekAvailable(@PathVariable Integer idDokter) {
+		List<Praktek> praktekList = repository.findAvailablePraktek(idDokter);
+		return praktekList;
 	}
 
 }
