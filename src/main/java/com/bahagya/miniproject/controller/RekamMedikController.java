@@ -96,6 +96,14 @@ public class RekamMedikController {
         return DefaultResponse.ok(rekamMedikDtoList);
     }
 
+    @GetMapping("/jadwal/idJadwal")
+    public List<Integer> getRmIdJadwal() {
+        List<RekamMedik> rekamMedikList = repository.findAll();
+        List<Integer> idJadwal = rekamMedikList.stream()
+                .map(rm -> rm.getIdJadwal()).collect(Collectors.toList());
+        return idJadwal;
+    }
+
     @PostMapping
     public DefaultResponse insert(@RequestBody FormRmDto dto) {
         RekamMedik rekamMedik = formRmAssembler.fromDto(dto);
