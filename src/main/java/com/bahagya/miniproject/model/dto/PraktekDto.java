@@ -16,6 +16,7 @@ public class PraktekDto {
 	private String poli;
 	private Date jadwal;
 	private String jam;
+	private String tersedia;
 	private Integer idDokter;
 
 }

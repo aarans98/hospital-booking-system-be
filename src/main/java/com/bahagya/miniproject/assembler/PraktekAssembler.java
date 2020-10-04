@@ -35,7 +35,8 @@ public class PraktekAssembler implements InterfaceAssembler<Praktek, PraktekDto>
 			entity.setJadwal(dto.getJadwal());
 		if (dto.getIdDokter() != null)
 			entity.setIdDokter(dto.getIdDokter());
-
+		if (dto.getTersedia() != null)
+			entity.setTersedia(dto.getTersedia());
 		if (dto.getJam() != null)
 			entity.setJam(dto.getJam());
 		return entity;
@@ -46,7 +47,7 @@ public class PraktekAssembler implements InterfaceAssembler<Praktek, PraktekDto>
 		if (entity == null)
 			return null;
 		return PraktekDto.builder().idPraktek(entity.getIdPraktek()).poli(entity.getPoli()).jadwal(entity.getJadwal())
-				.idDokter(entity.getDokter().getIdDokter()).jam(entity.getJam()).build();
+				.idDokter(entity.getDokter().getIdDokter()).jam(entity.getJam()).tersedia(entity.getTersedia()).build();
 	}
 
 }

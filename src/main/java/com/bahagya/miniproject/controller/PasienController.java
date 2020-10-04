@@ -1,8 +1,12 @@
 package com.bahagya.miniproject.controller;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.bahagya.miniproject.model.dto.PraktekDto;
+import com.bahagya.miniproject.model.entity.Praktek;
+import com.bahagya.miniproject.repository.PraktekRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +34,8 @@ public class PasienController {
 	private PasienRepo repository;
 	@Autowired
 	private JadwalDokterRepo repositori;
+	@Autowired
+	private PraktekRepo praktekRepository;
 	@Autowired
 	private PasienAssembler assembler;
 
@@ -60,10 +66,13 @@ public class PasienController {
 		Pasien pasien = assembler.fromDto(dto);
 		repository.save(pasien);
 		JadwalDokter jd = new JadwalDokter();
+		Praktek praktek = praktekRepository.findById(dto.getIdPraktek()).get();
 		jd.setIdDokter(dto.getIdDokter());
 		jd.setIdPraktek(dto.getIdPraktek());
 		jd.setNama_lengkap(dto.getNama_lengkap());
 		jd.setUsername(dto.getUsername());
+		praktek.setTersedia("booked");
+		praktekRepository.save(praktek);
 		repositori.save(jd);
 		return DefaultResponse.ok(dto);
 	}

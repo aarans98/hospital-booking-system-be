@@ -24,6 +24,9 @@ public class Praktek {
     @Column(name = "jam")
     private String jam;
 
+    @Column(name = "tersedia")
+    private String tersedia;
+
     @ManyToOne
     @JoinColumn(name = "id_dokter", insertable = false, updatable = false)
     private Dokter dokter;
