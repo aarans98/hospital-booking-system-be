@@ -5,6 +5,7 @@ import com.bahagya.miniproject.assembler.RegisterAssembler;
 import com.bahagya.miniproject.configuration.DefaultResponse;
 import com.bahagya.miniproject.model.dto.RegisterDto;
 import com.bahagya.miniproject.model.dto.ResponLogin;
+import com.bahagya.miniproject.model.dto.authmail;
 import com.bahagya.miniproject.model.entity.Register;
 import com.bahagya.miniproject.repository.RegisterRepo;
 
@@ -43,11 +44,14 @@ public class RegisterController {
     /* Insert Data */
     @PostMapping
     public Register insert(@RequestBody RegisterDto dto) {
-    List<Register> registerList = repository.findAll();
-    List<Boolean> regCheck = registerList.stream().map(x -> x.getUsername().equals(dto.getUsername()))
+        List<Register> registerList = repository.findAll();
+        List<Boolean> nameCheck = registerList.stream().map(x -> x.getUsername().equals(dto.getUsername()))
                 .collect(Collectors.toList());
+        List<Boolean> mailCheck = registerList.stream().map(x -> x.getEmail().equals(dto.getEmail()))
+                .collect(Collectors.toList());
+
         Register register = new Register();
-        if (!regCheck.contains(true)){
+        if ((!nameCheck.contains(true)) && (!mailCheck.contains(true))) {
             register = assembler.fromDto(dto);
             repository.save(register);
         }
@@ -56,19 +60,26 @@ public class RegisterController {
 
     @PostMapping("/forgot")
     public ResponLogin forgot(@RequestParam String username, String password, String passwordrep) {
-    	ResponLogin respon=new ResponLogin();
+        ResponLogin respon = new ResponLogin();
         Register register = repository.findById(username).get();
-        if(password.equals(passwordrep)) {
-        register.setPassword(password);
-        register.setPasswordrep(passwordrep);
-        repository.save(register);
-        respon.setStatus(true);
-        return respon;
+        if (password.equals(passwordrep)) {
+            register.setPassword(password);
+            register.setPasswordrep(passwordrep);
+            repository.save(register);
+            respon.setStatus(true);
+            return respon;
+        } else {
+            respon.setStatus(false);
+            return respon;
         }
-        else {
-        	respon.setStatus(false);
-        	return respon;
-        }
+    }
+
+    @GetMapping("/authmail")
+    public authmail authmail(@RequestParam String username) {
+        authmail tes = new authmail();
+        Register register = repository.findById(username).get();
+        tes.setMail(register.getEmail());
+        return tes;
     }
 
     @GetMapping("/login")

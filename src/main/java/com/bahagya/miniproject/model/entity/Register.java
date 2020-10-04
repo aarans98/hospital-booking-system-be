@@ -29,6 +29,6 @@ public class Register {
     @Column(name = "passwordrep", nullable = false, length = 12)
     private String passwordrep;
 
-    @Column(name = "email", nullable = false, length = 30)
+    @Column(name = "email", nullable = false, length = 30, unique = true)
     private String email;
 }
