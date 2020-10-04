@@ -50,6 +50,14 @@ public class RekamMedikController {
         return DefaultResponse.ok(rekamMedikDtoList);
     }
 
+    @GetMapping("/jumlah")
+    public Integer getIdRekamMedik() {
+        List<RekamMedik> rekamMedikList = repository.findAll();
+        Integer count = rekamMedikList.size();
+        return count;
+    }
+
+
     // http://localhost:1212/v1/app/rekam-medik/1
     @GetMapping("/{id}")
     public DefaultResponse get(@PathVariable Integer id) {
