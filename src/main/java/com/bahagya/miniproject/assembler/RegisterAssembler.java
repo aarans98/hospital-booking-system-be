@@ -39,6 +39,8 @@ public class RegisterAssembler implements InterfaceAssembler<Register, RegisterD
             entity.setPasswordrep(dto.getPasswordrep());
         if (dto.getEmail() != null)
             entity.setEmail(dto.getEmail());
+        if (dto.getFullname() != null)
+            entity.setFullname(dto.getFullname());
 
         return entity;
 

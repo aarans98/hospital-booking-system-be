@@ -1,8 +1,12 @@
 package com.bahagya.miniproject.controller;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import com.bahagya.miniproject.model.entity.Dokter;
+import com.bahagya.miniproject.model.entity.Obat;
+import com.bahagya.miniproject.repository.ObatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,8 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bahagya.miniproject.assembler.InformasiStafAssembler;
 import com.bahagya.miniproject.configuration.DefaultResponse;
 import com.bahagya.miniproject.model.dto.InformasiStafDto;
+import com.bahagya.miniproject.model.dto.JumlahDto;
 import com.bahagya.miniproject.model.entity.InformasiStaf;
 import com.bahagya.miniproject.repository.InformasiStafRepository;
+import com.bahagya.miniproject.repository.DokterRepo;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -26,6 +32,10 @@ public class InformasiStafController {
 	
 	@Autowired
 	private InformasiStafRepository repository;
+	@Autowired
+	private DokterRepo dokterRepository;
+	@Autowired
+	private ObatRepository obatRepository;
 	@Autowired
 	private InformasiStafAssembler assembler;
 	
@@ -58,5 +68,39 @@ public class InformasiStafController {
 	public void delete(@PathVariable Integer id) {
 		repository.deleteById(id);
 	}
-	
+
+	@GetMapping("/jumlahstaf")
+	public JumlahDto getJumlahStaf() {
+		List<InformasiStaf> informasiStafList = repository.findAll();
+		JumlahDto dto = new JumlahDto();
+		int j  = 0;
+		for (int i=0; i < informasiStafList.size(); i++) {
+			j++;
+		}
+		dto.setJumlah(j);
+		return dto;
+	}
+
+	@GetMapping("/jumlahdokter")
+	public JumlahDto getJumlahDokter() {
+		List<Dokter> dokterList = dokterRepository.findAll();
+		JumlahDto dto = new JumlahDto();
+		int j  = 0;
+		for (int i=0; i < dokterList.size(); i++) {
+			j++;
+		}
+		dto.setJumlah(j);
+		return dto;
+	}
+	@GetMapping("/jumlahobat")
+	public JumlahDto getJumlahObat() {
+		List<Obat> obatList = obatRepository.findAll();
+		JumlahDto dto = new JumlahDto();
+		int j  = 0;
+		for (int i=0; i < obatList.size(); i++) {
+			j++;
+		}
+		dto.setJumlah(j);
+		return dto;
+	}
 }
