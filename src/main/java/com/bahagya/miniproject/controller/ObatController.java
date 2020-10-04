@@ -40,6 +40,13 @@ public class ObatController {
         return IdObatList;
     }
 
+    @GetMapping("/jumlah")
+    public Integer getAvailableObat() {
+        List<Obat> obatList = repository.findAll();
+        Integer count = obatList.size();
+        return count;
+    }
+
     @PostMapping
     public DefaultResponse insert(@RequestBody ObatDto dto) {
         Obat Obat = assembler.fromDto(dto);
