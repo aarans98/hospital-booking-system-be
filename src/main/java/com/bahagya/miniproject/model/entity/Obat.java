@@ -15,7 +15,7 @@ public class Obat {
     @Column(name = "id_obat", length = 25)
     private String idObat;
 
-    @Column(name = "nama_obat")
+    @Column(name = "nama_obat", unique = true)
     private String namaObat;
 
     @Column(name = "deskripsi")

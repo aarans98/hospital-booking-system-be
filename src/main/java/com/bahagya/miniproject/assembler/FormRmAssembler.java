@@ -3,6 +3,7 @@ package com.bahagya.miniproject.assembler;
 import com.bahagya.miniproject.model.dto.FormRmDto;
 import com.bahagya.miniproject.model.entity.RekamMedik;
 import com.bahagya.miniproject.model.entity.RmObat;
+import com.bahagya.miniproject.repository.ObatRepository;
 import com.bahagya.miniproject.repository.RekamMedikRepository;
 import com.bahagya.miniproject.repository.RmObatRepository;
 
@@ -19,6 +20,9 @@ public class FormRmAssembler implements InterfaceAssembler<RekamMedik, FormRmDto
 
     @Autowired
     private RekamMedikRepository repository;
+
+    @Autowired
+    private ObatRepository obatRepository;
 
     @Autowired
     private RmObatRepository rmObatRepository;
@@ -52,9 +56,9 @@ public class FormRmAssembler implements InterfaceAssembler<RekamMedik, FormRmDto
     public FormRmDto fromEntity(RekamMedik entity) {
         if (entity == null) return null;
         List<RmObat> rmObat = rmObatRepository.findAllByRekamMedikIdRekamMedik(entity.getIdRekamMedik());
-        List<String> obatId = new ArrayList<>();
+        List<String> obatNama = new ArrayList<>();
         if(!rmObat.isEmpty()){
-            obatId = rmObat.stream().map(obat -> obat.getObat().getIdObat()).collect(Collectors.toList());
+            obatNama = rmObat.stream().map(obat -> obat.getObat().getNamaObat()).collect(Collectors.toList());
         }
         return FormRmDto.builder()
                 .id(entity.getIdRekamMedik())
@@ -64,7 +68,7 @@ public class FormRmAssembler implements InterfaceAssembler<RekamMedik, FormRmDto
                 .gejala(entity.getGejala())
                 .diagnosa(entity.getDiagnosa())
                 .idJadwal(entity.getIdJadwal())
-                .idObat(obatId)
+                .namaObat(obatNama)
                 .dosis(entity.getDosis())
                 .build();
     }

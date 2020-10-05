@@ -24,20 +24,6 @@ public class RmObatAssembler {
     public RmObat toEntity(Integer idRekamMedik, String idObat) {
 
         RmObat entity = new RmObat();
-        // if (idRekamMedik != null && idObat != null) {
-        //     List<RmObat> temp = this.repository.findAllByRekamMedikIdRekamMedik(idRekamMedik);
-        //     if (!temp.isEmpty()) {
-        //         for (int i = 0; i < temp.size(); i++) {
-        //             this.repository.deleteById(temp.get(i).getIdRmObat());
-        //         }
-        //     }
-            // for (int i = 0; i < temp.size(); i++) {
-            // if(temp.get(i).getObat().getIdObat().equals(idObat)){
-            // entity = temp.get(i);
-            // }
-            // }
-        // }
-
         if (idRekamMedik != null && idObat != null) {
             RekamMedik rekamMedik = rmRepository.findById(idRekamMedik).get();
             entity.setRekamMedik(rekamMedik);

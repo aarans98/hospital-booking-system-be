@@ -4,9 +4,11 @@ import com.bahagya.miniproject.configuration.DefaultResponse;
 import com.bahagya.miniproject.model.dto.FormRmDto;
 import com.bahagya.miniproject.model.dto.RekamMedikDto;
 import com.bahagya.miniproject.model.entity.JadwalDokter;
+import com.bahagya.miniproject.model.entity.Obat;
 import com.bahagya.miniproject.model.entity.RekamMedik;
 import com.bahagya.miniproject.model.entity.RmObat;
 import com.bahagya.miniproject.repository.JadwalDokterRepo;
+import com.bahagya.miniproject.repository.ObatRepository;
 import com.bahagya.miniproject.repository.RekamMedikRepository;
 import com.bahagya.miniproject.repository.RmObatRepository;
 import com.bahagya.miniproject.service.RekamMedikService;
@@ -38,6 +40,8 @@ public class RekamMedikController {
     private RmObatAssembler rmObatAssambler;
     @Autowired
     private RmObatRepository rmObatRepository;
+    @Autowired
+    private ObatRepository obatRepository;
     @Autowired
     private JadwalDokterRepo jdRepository;
 
@@ -116,15 +120,16 @@ public class RekamMedikController {
     public DefaultResponse insert(@RequestBody FormRmDto dto) {
         RekamMedik rekamMedik = formRmAssembler.fromDto(dto);
         repository.save(rekamMedik);
-        if (!dto.getIdObat().isEmpty()) {
+        if (!dto.getNamaObat().isEmpty()) {
             List<RmObat> temp = rmObatRepository.findAllByRekamMedikIdRekamMedik(dto.getId());
             if (!temp.isEmpty()) {
                 for (int i = 0; i < temp.size(); i++) {
                     rmObatRepository.deleteById(temp.get(i).getIdRmObat());
                 }
             }
-            for (int i = 0; i < dto.getIdObat().size(); i++) {
-                RmObat rmObat = rmObatAssambler.toEntity(dto.getId(), dto.getIdObat().get(i));
+            for (int i = 0; i < dto.getNamaObat().size(); i++) {
+                Obat obat = obatRepository.findByNamaObat(dto.getNamaObat().get(i)).get();
+                RmObat rmObat = rmObatAssambler.toEntity(dto.getId(), obat.getIdObat());
                 rmObatRepository.save(rmObat);
             }
         }

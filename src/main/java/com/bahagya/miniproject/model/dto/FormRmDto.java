@@ -21,7 +21,7 @@ public class FormRmDto {
     private Integer beratBadan;
     private String gejala;
     private String diagnosa;
-    private List<String> idObat;
+    private List<String> namaObat;
     private String dosis;
 
 }
