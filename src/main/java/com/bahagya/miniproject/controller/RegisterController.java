@@ -42,19 +42,27 @@ public class RegisterController {
 
     /* Insert Data */
     @PostMapping
-    public ResponLogin insert(@RequestBody RegisterDto dto) {
+    public Register insert(@RequestBody RegisterDto dto) {
         List<Register> registerList = repository.findAll();
         List<Boolean> nameCheck = registerList.stream().map(x -> x.getUsername().equals(dto.getUsername()))
                 .collect(Collectors.toList());
         List<Boolean> mailCheck = registerList.stream().map(x -> x.getEmail().equals(dto.getEmail()))
                 .collect(Collectors.toList());
-
         Register register = new Register();
         if ((!nameCheck.contains(true)) && (!mailCheck.contains(true))) {
             register = assembler.fromDto(dto);
             repository.save(register);
+            return register;
         }
-        return register;
+        else if(nameCheck.contains(true)) {
+        	register.setUsername("false");
+        	return register;
+        }
+        else if(mailCheck.contains(true)) {
+        	register.setEmail("false");
+        	return register;
+        }
+        return null;
     }
 
     @PostMapping("/forgot")
