@@ -5,7 +5,7 @@ import com.bahagya.miniproject.assembler.RegisterAssembler;
 import com.bahagya.miniproject.configuration.DefaultResponse;
 import com.bahagya.miniproject.model.dto.RegisterDto;
 import com.bahagya.miniproject.model.dto.ResponLogin;
-import com.bahagya.miniproject.model.dto.authmail;
+import com.bahagya.miniproject.model.dto.Authmail;
 import com.bahagya.miniproject.model.entity.Register;
 import com.bahagya.miniproject.repository.RegisterRepo;
 
@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,13 +48,21 @@ public class RegisterController {
                 .collect(Collectors.toList());
         List<Boolean> mailCheck = registerList.stream().map(x -> x.getEmail().equals(dto.getEmail()))
                 .collect(Collectors.toList());
-
         Register register = new Register();
         if ((!nameCheck.contains(true)) && (!mailCheck.contains(true))) {
             register = assembler.fromDto(dto);
             repository.save(register);
+            return register;
         }
-        return register;
+        else if(nameCheck.contains(true)) {
+        	register.setUsername("false");
+        	return register;
+        }
+        else if(mailCheck.contains(true)) {
+        	register.setEmail("false");
+        	return register;
+        }
+        return null;
     }
 
     @PostMapping("/forgot")
@@ -75,8 +82,8 @@ public class RegisterController {
     }
 
     @GetMapping("/authmail")
-    public authmail authmail(@RequestParam String username) {
-        authmail tes = new authmail();
+    public Authmail authmail(@RequestParam String username) {
+        Authmail tes = new Authmail();
         Register register = repository.findById(username).get();
         tes.setMail(register.getEmail());
         return tes;
